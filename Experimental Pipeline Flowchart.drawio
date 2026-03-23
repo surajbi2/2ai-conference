@@ -1,0 +1,34 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/29.5.2 Chrome/142.0.7444.265 Electron/39.6.1 Safari/537.36" version="29.5.2">
+  <diagram name="Page-1" id="dOEOJJu_SGFRf7RFKVyO">
+    <mxGraphModel dx="1611" dy="611" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="583" pageHeight="827" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="aqP3tIIoG4HPmNO0aOOG-1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E3F2FD;strokeColor=#1976D2;fontFamily=arial;fontSize=11;" value="&lt;div&gt;MURA Dataset&lt;/div&gt;&lt;div&gt;━━━━━━━━━━━━&lt;/div&gt;&lt;div&gt;40,561 Studies&lt;/div&gt;&lt;div&gt;7 Anatomies&lt;/div&gt;&lt;div&gt;Train/Valid Split&lt;/div&gt;" vertex="1">
+          <mxGeometry height="90" width="170" x="-190" y="240" as="geometry" />
+        </mxCell>
+        <mxCell id="aqP3tIIoG4HPmNO0aOOG-6" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E3F2FD;strokeColor=#1976D2;fontFamily=arial;fontSize=11;" value="&lt;div&gt;MURA Dataset&lt;/div&gt;&lt;div&gt;━━━━━━━━━━━━&lt;/div&gt;&lt;div&gt;40,561 Studies&lt;/div&gt;&lt;div&gt;7 Anatomies&lt;/div&gt;&lt;div&gt;Train/Valid Split&lt;/div&gt;" vertex="1">
+          <mxGeometry height="90" width="170" x="320" as="geometry" />
+        </mxCell>
+        <mxCell id="aqP3tIIoG4HPmNO0aOOG-7" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E3F2FD;strokeColor=#1976D2;fontFamily=arial;fontSize=11;" value="&lt;div&gt;MURA Dataset&lt;/div&gt;&lt;div&gt;━━━━━━━━━━━━&lt;/div&gt;&lt;div&gt;40,561 Studies&lt;/div&gt;&lt;div&gt;7 Anatomies&lt;/div&gt;&lt;div&gt;Train/Valid Split&lt;/div&gt;" vertex="1">
+          <mxGeometry height="90" width="170" x="150" y="470" as="geometry" />
+        </mxCell>
+        <mxCell id="aqP3tIIoG4HPmNO0aOOG-8" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="Anatomy Selection" vertex="1">
+          <mxGeometry height="30" width="120" x="150" y="190" as="geometry" />
+        </mxCell>
+        <mxCell id="aqP3tIIoG4HPmNO0aOOG-9" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="" vertex="1">
+          <mxGeometry height="190" width="500" y="220" as="geometry" />
+        </mxCell>
+        <mxCell id="aqP3tIIoG4HPmNO0aOOG-10" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="Source" vertex="1">
+          <mxGeometry height="30" width="60" x="70" y="240" as="geometry" />
+        </mxCell>
+        <mxCell id="aqP3tIIoG4HPmNO0aOOG-11" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="&lt;div&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;Wrist&lt;/span&gt;&lt;/div&gt;&lt;div&gt;━━━━━━━━━&lt;/div&gt;&lt;div&gt;Train: 9,016 images&lt;/div&gt;&lt;div&gt;Valid: 3,295 images&lt;/div&gt;" vertex="1">
+          <mxGeometry height="70" width="140" x="30" y="270" as="geometry" />
+        </mxCell>
+        <mxCell id="aqP3tIIoG4HPmNO0aOOG-12" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="&lt;div&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;Wrist&lt;/span&gt;&lt;/div&gt;&lt;div&gt;━━━━━━━━━&lt;/div&gt;&lt;div&gt;Train: 9,016 images&lt;/div&gt;&lt;div&gt;Valid: 3,295 images&lt;/div&gt;" vertex="1">
+          <mxGeometry height="150" width="310" x="180" y="250" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

@@ -1,0 +1,135 @@
+<mxfile scale="1" border="20">
+  <diagram id="AixRHbPba9MQKmiQaLAK" name="Page-1">
+    <mxGraphModel grid="1" page="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="0" name="Page-1">
+    <mxGraphModel dx="3735" dy="2877" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="aDzo8Of3BSjVKoS-f9_V-13" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1125" y="-50" width="190" height="310" as="geometry" />
+        </mxCell>
+        <mxCell id="title" value="&lt;h1&gt;Experimental Pipeline&lt;/h1&gt;" style="whiteSpace=wrap;html=1;fontSize=16;fontFamily=Arial;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="110" y="-240" width="590" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="dataBox" value="&lt;b&gt;MURA Dataset&amp;nbsp;&lt;/b&gt;&lt;div&gt;36,323 Studies&amp;nbsp;&lt;div&gt;7 Anatomies&amp;nbsp;&lt;/div&gt;&lt;div&gt;Train/Valid Split&lt;/div&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E3F2FD;strokeColor=#1976D2;strokeWidth=2;fontSize=11;fontFamily=Arial;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="-410" y="-210" width="160" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="anatParent" value="&lt;b&gt;Anatomy Selection&lt;/b&gt;" style="group;whiteSpace=wrap;html=1;dashed=1;strokeColor=#757575;strokeWidth=1;fontSize=11;fontFamily=Arial;align=center;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="-480" y="30" width="300" height="300" as="geometry" />
+        </mxCell>
+        <mxCell id="sourceBox" value="&lt;b&gt;SOURCE&lt;/b&gt;&lt;div&gt;Wrist&amp;nbsp;&lt;div&gt;Train: 9,756 images Valid: 659images&lt;/div&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#388E3C;strokeWidth=2;fontSize=11;fontFamily=Arial;align=center;verticalAlign=middle;" vertex="1" parent="anatParent">
+          <mxGeometry x="17.5" y="42.85714285714286" width="254.99999999999997" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="targetsGroup" value="&lt;b&gt;TARGETS&lt;/b&gt;" style="whiteSpace=wrap;html=1;fontSize=11;fontFamily=Arial;align=center;verticalAlign=top;strokeColor=black;fillColor=none;dashed=1" vertex="1" parent="anatParent">
+          <mxGeometry x="12.5" y="142.91428571428574" width="277.5" height="142.14285714285717" as="geometry" />
+        </mxCell>
+        <mxCell id="elbowBox" value="ELBOW" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFE0B2;strokeColor=#F57C00;strokeWidth=1;fontSize=9;fontFamily=Arial;align=center;verticalAlign=middle;" vertex="1" parent="anatParent">
+          <mxGeometry x="17.5" y="192.67142857142858" width="57.89473684210526" height="42.64285714285715" as="geometry" />
+        </mxCell>
+        <mxCell id="handBox" value="HAND" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFE0B2;strokeColor=#F57C00;strokeWidth=1;fontSize=9;fontFamily=Arial;align=center;verticalAlign=middle;" vertex="1" parent="anatParent">
+          <mxGeometry x="89.86842105263158" y="192.52857142857144" width="57.89473684210526" height="42.64285714285715" as="geometry" />
+        </mxCell>
+        <mxCell id="shoulderBox" value="SHOULDER" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFE0B2;strokeColor=#F57C00;strokeWidth=1;fontSize=9;fontFamily=Arial;align=center;verticalAlign=middle;" vertex="1" parent="anatParent">
+          <mxGeometry x="162.23684210526315" y="192.52857142857144" width="57.89473684210526" height="42.64285714285715" as="geometry" />
+        </mxCell>
+        <mxCell id="fingerBox" value="FINGER" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFE0B2;strokeColor=#F57C00;strokeWidth=1;fontSize=9;fontFamily=Arial;align=center;verticalAlign=middle;" vertex="1" parent="anatParent">
+          <mxGeometry x="234.6" y="192.81428571428575" width="52.9" height="42.5" as="geometry" />
+        </mxCell>
+        <mxCell id="arrow1" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;html=1;strokeColor=#424242;strokeWidth=2;" edge="1" parent="1" source="dataBox" target="anatParent">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="aDzo8Of3BSjVKoS-f9_V-2" style="edgeStyle=none;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="trainingBox" target="multiSeed">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="aDzo8Of3BSjVKoS-f9_V-4" style="edgeStyle=none;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="trainingBox" target="zeroShotBox">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="150" y="40" />
+              <mxPoint x="150" y="-10" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="trainingBox" value="&lt;b&gt;MODEL TRAINING&lt;/b&gt;&lt;div&gt;&lt;b&gt;&lt;br&gt;&lt;/b&gt;&lt;div&gt;DenseNet-121 (ImageNet Init)  Binary Classification Fracture vs Normal  10 epochs BCE Loss, Adam&lt;/div&gt;&lt;/div&gt;" style="whiteSpace=wrap;html=1;fillColor=#E1BEE7;strokeColor=#7B1FA2;strokeWidth=3;fontSize=11;fontFamily=Arial;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="-86" y="-30" width="210" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="multiSeed" value="&lt;b&gt;5 RANDOM SEEDS&lt;/b&gt;&lt;div&gt;&lt;div&gt;{42, 123, 456, 789, 2024}&lt;div&gt;Robust Statistics&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;" style="shape=parallelogram;whiteSpace=wrap;html=1;fillColor=#F3E5F5;strokeColor=#000000;strokeWidth=1;fontSize=11;fontFamily=Arial;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="-96" y="130" width="220" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="arrow2" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;html=1;strokeColor=#424242;strokeWidth=2;" edge="1" parent="1" source="anatParent" target="trainingBox">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="aDzo8Of3BSjVKoS-f9_V-3" style="edgeStyle=none;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="zeroShotBox" target="statBox">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="aDzo8Of3BSjVKoS-f9_V-5" style="edgeStyle=none;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="zeroShotBox" target="metricsBox">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="zeroShotBox" value="&lt;div&gt;&lt;font color=&quot;#000000&quot;&gt;&lt;b&gt;ZERO-SHOT TRANSFER&lt;/b&gt;&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;color: rgb(63, 63, 63); background-color: transparent;&quot;&gt;&amp;nbsp;&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;color: rgb(63, 63, 63); background-color: transparent;&quot;&gt;&amp;nbsp;Source Model&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;font color=&quot;#000000&quot;&gt;&amp;nbsp; &amp;nbsp;↓&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;color: rgb(63, 63, 63); background-color: transparent;&quot;&gt;&amp;nbsp; ELBOW ← Test&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;font color=&quot;#000000&quot;&gt;&amp;nbsp; HAND ← Test&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font color=&quot;#000000&quot;&gt;&amp;nbsp; SHOULDER ← Test&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font color=&quot;#000000&quot;&gt;&amp;nbsp; &amp;nbsp;FINGER ← Test&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;font color=&quot;#000000&quot;&gt;5 seeds × 5 anatomies&amp;nbsp;&lt;/font&gt;&lt;span style=&quot;background-color: transparent;&quot;&gt;= 25 runs&lt;/span&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF9C4;strokeColor=#F57F17;strokeWidth=3;dashed=1;fontSize=11;fontFamily=Arial;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="190" y="-100" width="300" height="180" as="geometry" />
+        </mxCell>
+        <mxCell id="statBox" value="&lt;b&gt;STATISTICAL TESTS&lt;/b&gt;&lt;div&gt;• Paired t-tests&amp;nbsp;&lt;/div&gt;&lt;div&gt;• Bonferroni (α=0.0125)&lt;/div&gt;&lt;div&gt;• Cohen&#39;s d • 95% CI&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFCDD2;strokeColor=#C62828;strokeWidth=2;fontSize=11;fontFamily=Arial;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="240" y="200" width="200" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="aDzo8Of3BSjVKoS-f9_V-6" style="edgeStyle=none;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="metricsBox" target="fnBox">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="aDzo8Of3BSjVKoS-f9_V-9" style="edgeStyle=orthogonalEdgeStyle;curved=1;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="metricsBox" target="sampleBox">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="760" y="-100" />
+              <mxPoint x="960" y="-100" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="metricsBox" value="&lt;b&gt;METRICS&amp;nbsp;&lt;/b&gt;&lt;div&gt;• AUC-ROC&amp;nbsp;&lt;/div&gt;&lt;div&gt;• Sensitivity&lt;/div&gt;&lt;div&gt;• Specificity&lt;/div&gt;&lt;div&gt;• Precision/&lt;/div&gt;&lt;div&gt;Recall&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#B2EBF2;strokeColor=#000000;strokeWidth=1;fontSize=11;fontFamily=Arial;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="590" y="-65" width="170" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="aDzo8Of3BSjVKoS-f9_V-7" style="edgeStyle=none;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="fnBox" target="operBox">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="fnBox" value="&lt;b&gt;CLINICAL IMPACT&lt;/b&gt;&lt;div&gt;• FN Rate/Anatomy&lt;/div&gt;&lt;div&gt;• High-Conf Errors&lt;/div&gt;&lt;div&gt;• Asymmetric Failures&amp;nbsp;&lt;/div&gt;&lt;div&gt;&amp;nbsp;67.5%&lt;span style=&quot;background-color: transparent; color: rgb(63, 63, 63);&quot;&gt;FN (Hand)&amp;nbsp;&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;background-color: transparent; color: rgb(63, 63, 63);&quot;&gt;91% High-Confidence&lt;/span&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EF9A9A;strokeColor=#C62828;strokeWidth=3;fontSize=11;fontFamily=Arial;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="567.5" y="100" width="215" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="operBox" value="&lt;b&gt;OPERATING POINTS&amp;nbsp;&lt;/b&gt;&lt;div&gt;&lt;span style=&quot;color: rgb(63, 63, 63); background-color: transparent;&quot;&gt;Thresholds:  {0.3, 0.5, 0.7}  Sens ↔ Spec Trade-off&lt;/span&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFCC80;strokeColor=#000000;strokeWidth=1;fontSize=11;fontFamily=Arial;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="595" y="245" width="160" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="aDzo8Of3BSjVKoS-f9_V-12" style="edgeStyle=none;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="sampleBox" target="recoveryBox">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="sampleBox" value="&lt;b&gt;SAMPLE EFFICIENCY&lt;/b&gt;&lt;div&gt;&lt;font color=&quot;#000000&quot;&gt;&lt;br&gt;&lt;/font&gt;&lt;div&gt;Sample Sizes: {10, 25, 50, 75, 100,  150, 200, 500}&lt;/div&gt;&lt;div&gt;3 Anatomies × 8 Sizes × 3 Runs = 72 experiments&lt;/div&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#388E3C;strokeWidth=2;fontSize=11;fontFamily=Arial;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="820" y="-30" width="280" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="aDzo8Of3BSjVKoS-f9_V-10" style="edgeStyle=orthogonalEdgeStyle;curved=1;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="recoveryBox" target="operBox">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="960" y="320" />
+              <mxPoint x="755" y="320" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="recoveryBox" value="&lt;b&gt;DATA REQUIREMENTS&amp;nbsp;&lt;/b&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;Elbow:    50 samples Shoulder: 500+ samples   Hand:     &amp;gt;500 (resist)  10× Variability&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#A5D6A7;strokeColor=#000000;strokeWidth=1;fontSize=11;fontFamily=Arial;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="825" y="140" width="270" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="out1" value="&lt;div&gt;&lt;span style=&quot;background-color: transparent;&quot;&gt;&amp;nbsp;Tables: AUC, FN, Efficiency&lt;/span&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#CFD8DC;strokeColor=#000000;strokeWidth=1;fontSize=11;fontFamily=Arial;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="1150" width="140" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="out2" value="&amp;nbsp;Plots: ROC, PR Curves" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#CFD8DC;strokeColor=#000000;strokeWidth=1;fontSize=11;fontFamily=Arial;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="1150" y="70" width="140" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="out3" value="Charts: Sample Learning" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#CFD8DC;strokeColor=#000000;strokeWidth=1;fontSize=11;fontFamily=Arial;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="1150" y="140" width="140" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="aDzo8Of3BSjVKoS-f9_V-14" value="&lt;b&gt;Results&lt;/b&gt;" style="text;strokeColor=none;align=center;fillColor=none;html=1;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="1180" y="-40" width="90" height="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

@@ -1,0 +1,122 @@
+<mxfile scale="1" border="20" host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/29.5.2 Chrome/142.0.7444.265 Electron/39.6.1 Safari/537.36" version="29.5.2">
+  <diagram id="AixRHbPba9MQKmiQaLAK" name="Page-1">
+    <mxGraphModel dx="2570" dy="1528" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="f9wKRIPA1ypgZDH8dZmx-1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="" vertex="1">
+          <mxGeometry height="310" width="190" x="1450" y="410" as="geometry" />
+        </mxCell>
+        <mxCell id="f9wKRIPA1ypgZDH8dZmx-2" parent="1" style="whiteSpace=wrap;html=1;fontSize=16;fontFamily=Arial;fontStyle=1;align=center;verticalAlign=middle;" value="&lt;h1&gt;Experimental Pipeline&lt;/h1&gt;" vertex="1">
+          <mxGeometry height="110" width="590" x="550" y="170" as="geometry" />
+        </mxCell>
+        <mxCell id="f9wKRIPA1ypgZDH8dZmx-3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E3F2FD;strokeColor=#1976D2;strokeWidth=2;fontSize=11;fontFamily=Arial;align=center;verticalAlign=middle;" value="&lt;b&gt;MURA Dataset&amp;nbsp;&lt;/b&gt;&lt;div&gt;36,323 Studies&amp;nbsp;&lt;div&gt;7 Anatomies&amp;nbsp;&lt;/div&gt;&lt;div&gt;Train/Valid Split&lt;/div&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="120" width="160" x="75" y="200" as="geometry" />
+        </mxCell>
+        <mxCell id="f9wKRIPA1ypgZDH8dZmx-4" parent="1" style="group;whiteSpace=wrap;html=1;dashed=1;strokeColor=#757575;strokeWidth=1;fontSize=11;fontFamily=Arial;align=center;verticalAlign=top;" value="&lt;b&gt;Anatomy Selection&lt;/b&gt;" vertex="1">
+          <mxGeometry height="300" width="290" x="10" y="380" as="geometry" />
+        </mxCell>
+        <mxCell id="f9wKRIPA1ypgZDH8dZmx-5" parent="f9wKRIPA1ypgZDH8dZmx-4" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#388E3C;strokeWidth=2;fontSize=11;fontFamily=Arial;align=center;verticalAlign=middle;" value="&lt;b&gt;SOURCE&lt;/b&gt;&lt;div&gt;Wrist&amp;nbsp;&lt;div&gt;Train: 9,756 images Valid: 659images&lt;/div&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="90" width="246.49999999999997" x="16.916666666666668" y="42.85714285714286" as="geometry" />
+        </mxCell>
+        <mxCell id="f9wKRIPA1ypgZDH8dZmx-6" parent="f9wKRIPA1ypgZDH8dZmx-4" style="whiteSpace=wrap;html=1;fontSize=11;fontFamily=Arial;align=center;verticalAlign=top;strokeColor=black;fillColor=none;dashed=1" value="&lt;b&gt;TARGETS&lt;/b&gt;" vertex="1">
+          <mxGeometry height="142.14285714285717" width="268.25" x="12.083333333333334" y="142.91428571428574" as="geometry" />
+        </mxCell>
+        <mxCell id="f9wKRIPA1ypgZDH8dZmx-7" parent="f9wKRIPA1ypgZDH8dZmx-4" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFE0B2;strokeColor=#F57C00;strokeWidth=1;fontSize=9;fontFamily=Arial;align=center;verticalAlign=middle;" value="ELBOW" vertex="1">
+          <mxGeometry height="42.64285714285715" width="55.96491228070175" x="16.916666666666668" y="192.67142857142858" as="geometry" />
+        </mxCell>
+        <mxCell id="f9wKRIPA1ypgZDH8dZmx-8" parent="f9wKRIPA1ypgZDH8dZmx-4" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFE0B2;strokeColor=#F57C00;strokeWidth=1;fontSize=9;fontFamily=Arial;align=center;verticalAlign=middle;" value="HAND" vertex="1">
+          <mxGeometry height="42.64285714285715" width="55.96491228070175" x="86.87280701754386" y="192.52857142857144" as="geometry" />
+        </mxCell>
+        <mxCell id="f9wKRIPA1ypgZDH8dZmx-9" parent="f9wKRIPA1ypgZDH8dZmx-4" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFE0B2;strokeColor=#F57C00;strokeWidth=1;fontSize=9;fontFamily=Arial;align=center;verticalAlign=middle;" value="SHOULDER" vertex="1">
+          <mxGeometry height="42.64285714285715" width="55.96491228070175" x="156.82894736842104" y="192.52857142857144" as="geometry" />
+        </mxCell>
+        <mxCell id="f9wKRIPA1ypgZDH8dZmx-10" parent="f9wKRIPA1ypgZDH8dZmx-4" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFE0B2;strokeColor=#F57C00;strokeWidth=1;fontSize=9;fontFamily=Arial;align=center;verticalAlign=middle;" value="FINGER" vertex="1">
+          <mxGeometry height="42.5" width="51.13666666666666" x="226.78" y="192.81428571428575" as="geometry" />
+        </mxCell>
+        <mxCell id="f9wKRIPA1ypgZDH8dZmx-11" edge="1" parent="1" source="f9wKRIPA1ypgZDH8dZmx-3" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;html=1;strokeColor=#424242;strokeWidth=2;" target="f9wKRIPA1ypgZDH8dZmx-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="f9wKRIPA1ypgZDH8dZmx-12" edge="1" parent="1" source="f9wKRIPA1ypgZDH8dZmx-14" style="edgeStyle=none;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="f9wKRIPA1ypgZDH8dZmx-15">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="BUSreaCYmU2xwnqmKBO1-1" edge="1" parent="1" source="f9wKRIPA1ypgZDH8dZmx-14" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="f9wKRIPA1ypgZDH8dZmx-19">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="f9wKRIPA1ypgZDH8dZmx-14" parent="1" style="whiteSpace=wrap;html=1;fillColor=#E1BEE7;strokeColor=#7B1FA2;strokeWidth=3;fontSize=11;fontFamily=Arial;align=center;verticalAlign=middle;" value="&lt;b&gt;MODEL TRAINING&lt;/b&gt;&lt;div&gt;&lt;b&gt;&lt;br&gt;&lt;/b&gt;&lt;div&gt;DenseNet-121 (ImageNet Init)  Binary Classification Fracture vs Normal  10 epochs BCE Loss, Adam&lt;/div&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="140" width="210" x="360" y="380" as="geometry" />
+        </mxCell>
+        <mxCell id="f9wKRIPA1ypgZDH8dZmx-15" parent="1" style="shape=parallelogram;whiteSpace=wrap;html=1;fillColor=#F3E5F5;strokeColor=#000000;strokeWidth=1;fontSize=11;fontFamily=Arial;align=center;verticalAlign=middle;" value="&lt;b&gt;5 RANDOM SEEDS&lt;/b&gt;&lt;div&gt;&lt;div&gt;{42, 123, 456, 789, 2024}&lt;div&gt;Robust Statistics&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="80" width="220" x="355" y="540" as="geometry" />
+        </mxCell>
+        <mxCell id="f9wKRIPA1ypgZDH8dZmx-16" edge="1" parent="1" source="f9wKRIPA1ypgZDH8dZmx-4" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;html=1;strokeColor=#424242;strokeWidth=2;" target="f9wKRIPA1ypgZDH8dZmx-14">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="f9wKRIPA1ypgZDH8dZmx-17" edge="1" parent="1" source="f9wKRIPA1ypgZDH8dZmx-19" style="edgeStyle=none;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="f9wKRIPA1ypgZDH8dZmx-20">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="f9wKRIPA1ypgZDH8dZmx-18" edge="1" parent="1" source="f9wKRIPA1ypgZDH8dZmx-19" style="edgeStyle=none;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="f9wKRIPA1ypgZDH8dZmx-23">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="f9wKRIPA1ypgZDH8dZmx-19" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF9C4;strokeColor=#F57F17;strokeWidth=3;dashed=1;fontSize=11;fontFamily=Arial;align=center;verticalAlign=middle;" value="&lt;div&gt;&lt;font color=&quot;#000000&quot;&gt;&lt;b&gt;ZERO-SHOT TRANSFER&lt;/b&gt;&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;color: rgb(63, 63, 63); background-color: transparent;&quot;&gt;&amp;nbsp;&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;color: rgb(63, 63, 63); background-color: transparent;&quot;&gt;&amp;nbsp;Source Model&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;font color=&quot;#000000&quot;&gt;&amp;nbsp; &amp;nbsp;↓&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;color: rgb(63, 63, 63); background-color: transparent;&quot;&gt;&amp;nbsp; ELBOW ← Test&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;font color=&quot;#000000&quot;&gt;&amp;nbsp; HAND ← Test&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font color=&quot;#000000&quot;&gt;&amp;nbsp; SHOULDER ← Test&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font color=&quot;#000000&quot;&gt;&amp;nbsp; &amp;nbsp;FINGER ← Test&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;font color=&quot;#000000&quot;&gt;5 seeds × 5 anatomies&amp;nbsp;&lt;/font&gt;&lt;span style=&quot;background-color: transparent;&quot;&gt;= 25 runs&lt;/span&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="180" width="300" x="606" y="360" as="geometry" />
+        </mxCell>
+        <mxCell id="f9wKRIPA1ypgZDH8dZmx-20" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFCDD2;strokeColor=#C62828;strokeWidth=2;fontSize=11;fontFamily=Arial;align=center;verticalAlign=middle;" value="&lt;b&gt;STATISTICAL TESTS&lt;/b&gt;&lt;div&gt;• Paired t-tests&amp;nbsp;&lt;/div&gt;&lt;div&gt;• Bonferroni (α=0.0125)&lt;/div&gt;&lt;div&gt;• Cohen&#39;s d • 95% CI&lt;/div&gt;" vertex="1">
+          <mxGeometry height="100" width="200" x="656" y="660" as="geometry" />
+        </mxCell>
+        <mxCell id="f9wKRIPA1ypgZDH8dZmx-21" edge="1" parent="1" source="f9wKRIPA1ypgZDH8dZmx-23" style="edgeStyle=none;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="f9wKRIPA1ypgZDH8dZmx-25">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="f9wKRIPA1ypgZDH8dZmx-22" edge="1" parent="1" source="f9wKRIPA1ypgZDH8dZmx-23" style="edgeStyle=orthogonalEdgeStyle;curved=1;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="f9wKRIPA1ypgZDH8dZmx-28">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1176" y="360" />
+              <mxPoint x="1376" y="360" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="f9wKRIPA1ypgZDH8dZmx-23" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#B2EBF2;strokeColor=#000000;strokeWidth=1;fontSize=11;fontFamily=Arial;align=center;verticalAlign=middle;" value="&lt;b&gt;METRICS&amp;nbsp;&lt;/b&gt;&lt;div&gt;• AUC-ROC&amp;nbsp;&lt;/div&gt;&lt;div&gt;• Sensitivity&lt;/div&gt;&lt;div&gt;• Specificity&lt;/div&gt;&lt;div&gt;• Precision/&lt;/div&gt;&lt;div&gt;Recall&lt;/div&gt;" vertex="1">
+          <mxGeometry height="110" width="170" x="928.5" y="395" as="geometry" />
+        </mxCell>
+        <mxCell id="f9wKRIPA1ypgZDH8dZmx-24" edge="1" parent="1" source="f9wKRIPA1ypgZDH8dZmx-25" style="edgeStyle=none;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="f9wKRIPA1ypgZDH8dZmx-26">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="f9wKRIPA1ypgZDH8dZmx-25" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EF9A9A;strokeColor=#C62828;strokeWidth=3;fontSize=11;fontFamily=Arial;align=center;verticalAlign=middle;" value="&lt;b&gt;CLINICAL IMPACT&lt;/b&gt;&lt;div&gt;• FN Rate/Anatomy&lt;/div&gt;&lt;div&gt;• High-Conf Errors&lt;/div&gt;&lt;div&gt;• Asymmetric Failures&amp;nbsp;&lt;/div&gt;&lt;div&gt;&amp;nbsp;67.5%&lt;span style=&quot;background-color: transparent; color: rgb(63, 63, 63);&quot;&gt;FN (Hand)&amp;nbsp;&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;background-color: transparent; color: rgb(63, 63, 63);&quot;&gt;91% High-Confidence&lt;/span&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="100" width="215" x="906" y="560" as="geometry" />
+        </mxCell>
+        <mxCell id="f9wKRIPA1ypgZDH8dZmx-26" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFCC80;strokeColor=#000000;strokeWidth=1;fontSize=11;fontFamily=Arial;align=center;verticalAlign=middle;" value="&lt;b&gt;OPERATING POINTS&amp;nbsp;&lt;/b&gt;&lt;div&gt;&lt;span style=&quot;color: rgb(63, 63, 63); background-color: transparent;&quot;&gt;Thresholds:  {0.3, 0.5, 0.7}  Sens ↔ Spec Trade-off&lt;/span&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="70" width="160" x="933.5" y="705" as="geometry" />
+        </mxCell>
+        <mxCell id="f9wKRIPA1ypgZDH8dZmx-27" edge="1" parent="1" source="f9wKRIPA1ypgZDH8dZmx-28" style="edgeStyle=none;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="f9wKRIPA1ypgZDH8dZmx-30">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="f9wKRIPA1ypgZDH8dZmx-28" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#388E3C;strokeWidth=2;fontSize=11;fontFamily=Arial;align=center;verticalAlign=middle;" value="&lt;b&gt;SAMPLE EFFICIENCY&lt;/b&gt;&lt;div&gt;&lt;font color=&quot;#000000&quot;&gt;&lt;br&gt;&lt;/font&gt;&lt;div&gt;Sample Sizes: {10, 25, 50, 75, 100,  150, 200, 500}&lt;/div&gt;&lt;div&gt;3 Anatomies × 8 Sizes × 3 Runs = 72 experiments&lt;/div&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="140" width="280" x="1158.5" y="430" as="geometry" />
+        </mxCell>
+        <mxCell id="f9wKRIPA1ypgZDH8dZmx-29" edge="1" parent="1" source="f9wKRIPA1ypgZDH8dZmx-30" style="edgeStyle=orthogonalEdgeStyle;curved=1;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" target="f9wKRIPA1ypgZDH8dZmx-26">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1298.5" y="780" />
+              <mxPoint x="1093.5" y="780" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="f9wKRIPA1ypgZDH8dZmx-30" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#A5D6A7;strokeColor=#000000;strokeWidth=1;fontSize=11;fontFamily=Arial;align=center;verticalAlign=middle;" value="&lt;b&gt;DATA REQUIREMENTS&amp;nbsp;&lt;/b&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;Elbow:    50 samples Shoulder: 500+ samples   Hand:     &amp;gt;500 (resist)  10× Variability&lt;/div&gt;" vertex="1">
+          <mxGeometry height="100" width="270" x="1163.5" y="600" as="geometry" />
+        </mxCell>
+        <mxCell id="f9wKRIPA1ypgZDH8dZmx-31" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#CFD8DC;strokeColor=#000000;strokeWidth=1;fontSize=11;fontFamily=Arial;align=center;verticalAlign=middle;" value="&lt;div&gt;&lt;span style=&quot;background-color: transparent;&quot;&gt;&amp;nbsp;Tables: AUC, FN, Efficiency&lt;/span&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="50" width="140" x="1488.5" y="460" as="geometry" />
+        </mxCell>
+        <mxCell id="f9wKRIPA1ypgZDH8dZmx-32" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#CFD8DC;strokeColor=#000000;strokeWidth=1;fontSize=11;fontFamily=Arial;align=center;verticalAlign=middle;" value="&amp;nbsp;Plots: ROC, PR Curves" vertex="1">
+          <mxGeometry height="50" width="140" x="1488.5" y="530" as="geometry" />
+        </mxCell>
+        <mxCell id="f9wKRIPA1ypgZDH8dZmx-33" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#CFD8DC;strokeColor=#000000;strokeWidth=1;fontSize=11;fontFamily=Arial;align=center;verticalAlign=middle;" value="Charts: Sample Learning" vertex="1">
+          <mxGeometry height="50" width="140" x="1488.5" y="600" as="geometry" />
+        </mxCell>
+        <mxCell id="f9wKRIPA1ypgZDH8dZmx-34" parent="1" style="text;strokeColor=none;align=center;fillColor=none;html=1;verticalAlign=middle;whiteSpace=wrap;rounded=0;" value="&lt;b&gt;Results&lt;/b&gt;" vertex="1">
+          <mxGeometry height="30" width="90" x="1518.5" y="420" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
