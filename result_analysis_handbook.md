@@ -53,9 +53,9 @@ If your evaluation doesn’t cover all three → incomplete.
 
 ## ✅ Accuracy
 
-[
+```math
 \frac{TP + TN}{Total}
-]
+```
 
 * Misleading in imbalanced datasets
 
@@ -63,9 +63,9 @@ If your evaluation doesn’t cover all three → incomplete.
 
 ## 🎯 Precision (Positive Predictive Value)
 
-[
+```math
 \frac{TP}{TP + FP}
-]
+```
 
 👉 “When model says fracture, how often correct?”
 
@@ -73,9 +73,9 @@ If your evaluation doesn’t cover all three → incomplete.
 
 ## 🔍 Recall (Sensitivity)
 
-[
+```math
 \frac{TP}{TP + FN}
-]
+```
 
 👉 “How many real fractures did we detect?”
 
@@ -85,9 +85,9 @@ If your evaluation doesn’t cover all three → incomplete.
 
 ## 🛡️ Specificity
 
-[
+```math
 \frac{TN}{TN + FP}
-]
+```
 
 👉 “How well we avoid false alarms”
 
@@ -95,9 +95,9 @@ If your evaluation doesn’t cover all three → incomplete.
 
 ## ⚖️ F1 Score
 
-[
+```math
 \frac{2PR}{P + R}
-]
+```
 
 👉 Balance of precision & recall
 
@@ -105,9 +105,9 @@ If your evaluation doesn’t cover all three → incomplete.
 
 ## 📌 Balanced Accuracy
 
-[
+```math
 \frac{Sensitivity + Specificity}{2}
-]
+```
 
 👉 Useful for imbalanced data
 
@@ -115,9 +115,9 @@ If your evaluation doesn’t cover all three → incomplete.
 
 ## 📊 MCC (Matthews Correlation Coefficient)
 
-[
+```math
 MCC = \frac{TP×TN - FP×FN}{\sqrt{(TP+FP)(TP+FN)(TN+FP)(TN+FN)}}
-]
+```
 
 👉 Best single metric for imbalance
 
@@ -193,9 +193,11 @@ If model says:
 
 ### 🔹 Brier Score
 
-[
+```math
+
 Mean (predicted - actual)^2
-]
+
+```
 
 * Lower is better
 
@@ -236,9 +238,9 @@ Used if you localize fractures.
 
 ## 📏 IoU (Intersection over Union)
 
-[
+```math
 \frac{Overlap}{Union}
-]
+```
 
 ---
 
@@ -261,9 +263,9 @@ Used if you localize fractures.
 
 ## 🎯 Dice Coefficient
 
-[
+```math
 \frac{2TP}{2TP + FP + FN}
-]
+```
 
 👉 Most used in medical imaging
 
@@ -271,9 +273,9 @@ Used if you localize fractures.
 
 ## 📏 IoU (Jaccard Index)
 
-[
+```math
 \frac{TP}{TP + FP + FN}
-]
+```
 
 ---
 
@@ -425,9 +427,9 @@ Used if you localize fractures.
 
 ## 📌 NPV (Negative Predictive Value)
 
-[
+```math
 \frac{TN}{TN + FN}
-]
+```
 
 👉 “If model says normal, can we trust it?”
 

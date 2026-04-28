@@ -1,0 +1,3 @@
+group,mean_center_activation,n_examples
+wrist_true_positive,0.5910845398902893,6
+hand_high_conf_fn,0.11643832549452782,6

@@ -1,0 +1,6 @@
+subset,total_fractures,false_negatives,fn_rate,high_conf_fn
+all,143,75,52.44755244755245,68
+hand,88,48,54.54545454545454,43
+leg,50,25,50.0,24
+hip,13,6,46.15384615384615,6
+shoulder,14,11,78.57142857142857,10

@@ -2,14 +2,6 @@ Good. Now we’re talking clearly about **your actual paper**:
 
 📄 **“Systematic Evaluation of Cross-Anatomy Transfer Learning in Fracture Detection”**
 
-
-I’ll explain this in two layers:
-
-1. **What you are actually doing (in plain terms)**
-2. **Why it is important (scientifically + clinically)**
-
-No fluff.
-
 ---
 
 # 1️⃣ What You Are Actually Doing

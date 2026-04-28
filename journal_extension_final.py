@@ -41,8 +41,7 @@ import seaborn as sns
 
 from sklearn.metrics import (
     roc_auc_score, accuracy_score, confusion_matrix,
-    roc_curve, precision_recall_curve, average_precision_score,
-    calibration_curve
+    roc_curve, precision_recall_curve, average_precision_score
 )
 from sklearn.manifold import TSNE
 from sklearn.decomposition import PCA
@@ -59,19 +58,42 @@ sns.set_palette("husl")
 # CONFIGURATION
 # =============================================================================
 
+# Detect MURA path once at import time — not inside the class so worker
+# processes don't re-run it on every spawn.
+def _find_mura_base():
+    candidates = [
+        r"D:\suraj\Suraj_py\MURA-v1.1",
+        r"C:\Users\Suraj\Documents\python\MURA-v1.1",
+        r"D:\suraj\MURA-v1.1",
+        r"C:\MURA-v1.1",
+        r"D:\MURA-v1.1",
+        os.path.join(os.path.expanduser("~"), "MURA-v1.1"),
+        os.path.join(os.path.dirname(os.path.abspath(__file__)), "MURA-v1.1"),
+    ]
+    for p in candidates:
+        if os.path.isdir(os.path.join(p, "train")):
+            return p
+    print(f"  [WARNING] MURA not found in known locations. Using: {candidates[0]}")
+    return candidates[0]
+
+# Evaluated once — class body references this cached value.
+_MURA_BASE = _find_mura_base()
+print(f"[CONFIG] MURA base: {_MURA_BASE}")
+
+
 class JournalConfig:
     """
     Configuration for journal extension experiments.
-    MODIFY PATHS TO MATCH YOUR SYSTEM.
+    Paths are auto-detected; override manually if needed.
     """
 
-    # ── MURA paths (same as conference code) ──────────────────────────────
-    MURA_BASE      = r"C:\Users\Suraj\Documents\python\MURA-v1.1"
+    # ── MURA paths ────────────────────────────────────────────────────────
+    MURA_BASE      = _MURA_BASE
     MURA_TRAIN     = os.path.join(MURA_BASE, "train")
     MURA_VALID     = os.path.join(MURA_BASE, "valid")
 
     # ── FracAtlas paths ───────────────────────────────────────────────────
-    FRACATLAS_BASE        = r"C:\FracAtlas\FracAtlas"
+    FRACATLAS_BASE        = r"D:\suraj\Suraj_py\FracAtlas"
     FRACATLAS_IMAGES      = os.path.join(FRACATLAS_BASE, "images")
     FRACATLAS_FRACTURED   = os.path.join(FRACATLAS_IMAGES, "Fractured")
     FRACATLAS_NORMAL      = os.path.join(FRACATLAS_IMAGES, "Non_fractured")
@@ -81,15 +103,13 @@ class JournalConfig:
     FRACATLAS_SPLIT_TEST  = os.path.join(FRACATLAS_BASE, "Utilities", "Fracture Split", "test.csv")
 
     # ── Saved MURA models from conference run ─────────────────────────────
-    # Point this to the folder where your conference code saved checkpoints.
-    # The conference code saves them as: source_model_seed{seed}.pth
-    CONFERENCE_RESULTS_DIR = r"."   # Change to e.g. "results_conference_20240115_120000"
+    CONFERENCE_RESULTS_DIR = r"."
 
     # ── MURA anatomy settings ─────────────────────────────────────────────
     SOURCE_ANATOMY     = "XR_WRIST"
     TARGET_ANATOMIES   = ["XR_ELBOW", "XR_HAND", "XR_SHOULDER", "XR_FINGER"]
     RANDOM_SEEDS       = [42, 123, 456, 789, 2024]
-    PRIMARY_SEED       = 42          # seed used for Phase 1-3 (single model)
+    PRIMARY_SEED       = 42
 
     # ── Training hyperparameters ─────────────────────────────────────────
     BATCH_SIZE       = 16
@@ -327,6 +347,32 @@ class FracAtlasDataset(Dataset):
 # MODEL
 # =============================================================================
 
+class FracAtlasSimpleDataset(Dataset):
+    """
+    Flat list-based dataset for FracAtlas.
+    Defined at module level so it can be pickled by Windows multiprocessing.
+    """
+    def __init__(self, samples):
+        self.samples = samples   # list of (img_path, label) tuples
+
+    def __len__(self):
+        return len(self.samples)
+
+    def __getitem__(self, idx):
+        img_path, label = self.samples[idx]
+        image = cv2.imread(img_path, cv2.IMREAD_GRAYSCALE)
+        if image is None:
+            image = np.zeros((224, 224), dtype=np.uint8)
+        else:
+            image = cv2.resize(image, (224, 224))
+        image = image.astype(np.float32) / 255.0
+        image = np.stack([image] * 3, axis=0)
+        return (
+            torch.tensor(image, dtype=torch.float32),
+            torch.tensor([label], dtype=torch.float32)
+        )
+
+
 from torchvision.models import densenet121, DenseNet121_Weights
 
 
@@ -407,7 +453,10 @@ def train_source_model(config, device, seed):
 # =============================================================================
 
 def evaluate(model, loader, device):
-    """Full evaluation: returns preds, targets, and metric dict."""
+    """Full evaluation: returns preds, targets, and metric dict.
+    Handles single-class datasets (e.g. FracAtlas split with only fractures)
+    by computing only the metrics that are valid for the available classes.
+    """
     model.eval()
     all_preds, all_targets = [], []
 
@@ -421,22 +470,62 @@ def evaluate(model, loader, device):
     preds   = np.array(all_preds)
     targets = np.array(all_targets)
 
-    if len(np.unique(targets)) < 2:
-        return {'preds': preds, 'targets': targets, 'auc': float('nan')}
+    nan = float('nan')
+
+    # Base result always present
+    base = {'preds': preds, 'targets': targets,
+            'auc': nan, 'ap': nan, 'accuracy': nan,
+            'sensitivity': nan, 'specificity': nan,
+            'ppv': nan, 'npv': nan,
+            'tp': 0, 'tn': 0, 'fp': 0, 'fn': 0}
+
+    if len(targets) == 0:
+        return base
 
     preds_binary = (preds >= 0.5).astype(int)
-    tn, fp, fn, tp = confusion_matrix(targets, preds_binary).ravel()
+    base['accuracy'] = float(accuracy_score(targets, preds_binary))
+
+    unique_classes = np.unique(targets)
+
+    if len(unique_classes) < 2:
+        # Only one class — compute what we can
+        # Sensitivity (recall) if only positives
+        if unique_classes[0] == 1:
+            tp = int((preds_binary == 1).sum())
+            fn = int((preds_binary == 0).sum())
+            base['sensitivity'] = tp / max(tp + fn, 1)
+            base['tp'] = tp
+            base['fn'] = fn
+            # FN rate is the key metric for fracture-only sets
+            print(f"    [NOTE] Single class (fracture only): "
+                  f"sensitivity={base['sensitivity']:.4f}  "
+                  f"fn_rate={fn / max(tp+fn, 1):.4f}  n={len(targets)}")
+        else:
+            # Only negatives
+            tn = int((preds_binary == 0).sum())
+            fp = int((preds_binary == 1).sum())
+            base['specificity'] = tn / max(tn + fp, 1)
+            base['tn'] = tn
+            base['fp'] = fp
+        return base
+
+    # Two classes — full metrics
+    try:
+        cm = confusion_matrix(targets, preds_binary, labels=[0, 1])
+        tn, fp, fn, tp = cm.ravel()
+    except ValueError:
+        return base
 
     return {
         'preds':       preds,
         'targets':     targets,
         'auc':         roc_auc_score(targets, preds),
         'ap':          average_precision_score(targets, preds),
-        'accuracy':    accuracy_score(targets, preds_binary),
-        'sensitivity': tp / (tp + fn) if (tp + fn) > 0 else 0,
-        'specificity': tn / (tn + fp) if (tn + fp) > 0 else 0,
-        'ppv':         tp / (tp + fp) if (tp + fp) > 0 else 0,
-        'npv':         tn / (tn + fn) if (tn + fn) > 0 else 0,
+        'accuracy':    float(accuracy_score(targets, preds_binary)),
+        'sensitivity': int(tp) / max(int(tp) + int(fn), 1),
+        'specificity': int(tn) / max(int(tn) + int(fp), 1),
+        'ppv':         int(tp) / max(int(tp) + int(fp), 1),
+        'npv':         int(tn) / max(int(tn) + int(fn), 1),
         'tp': int(tp), 'tn': int(tn), 'fp': int(fp), 'fn': int(fn),
     }
 
@@ -652,7 +741,7 @@ def run_gradcam_analysis(model, config, device, output_dir):
 
 def _plot_gradcam_summary(df_stats, config, output_dir):
     """Bar chart comparing attention intensity across anatomies."""
-    if df_stats.empty:
+    if df_stats.empty or 'anatomy' not in df_stats.columns:
         return
 
     fig, axes = plt.subplots(1, 2, figsize=(12, 4))
@@ -780,6 +869,9 @@ def run_feature_analysis(model, config, device, output_dir):
 
     if len(anatomy_feats) < 2:
         print("  [SKIP] Not enough anatomies for feature analysis.")
+        print("         This is caused by MURA paths not resolving correctly.")
+        print(f"         MURA_VALID = {config.MURA_VALID}")
+        print(f"         Exists? {os.path.isdir(config.MURA_VALID)}")
         return pd.DataFrame()
 
     # ── Build combined feature matrix for t-SNE ───────────────────────
@@ -902,6 +994,8 @@ def run_feature_analysis(model, config, device, output_dir):
 
 def _plot_distance_ratios(df_dist, config, output_dir):
     """Bar chart: anatomy distance ratio — higher = more anatomy-encoded."""
+    if df_dist.empty or 'anatomy' not in df_dist.columns:
+        return
     fig, ax = plt.subplots(figsize=(10, 4))
 
     colors = ['#2ecc71' if a == config.SOURCE_ANATOMY else '#e74c3c'
@@ -1070,6 +1164,9 @@ def run_calibration_analysis(model, config, device, output_dir):
 
 def _plot_ece_comparison(df_ece, config, output_dir):
     """Two-panel: ECE and high-confidence error rate by anatomy."""
+    if df_ece.empty or 'anatomy' not in df_ece.columns:
+        print("  [SKIP] ECE comparison plot: no data.")
+        return
     fig, axes = plt.subplots(1, 2, figsize=(12, 4))
 
     for ax, col, ylabel, title in [
@@ -1079,6 +1176,9 @@ def _plot_ece_comparison(df_ece, config, output_dir):
          'High-confidence error rate',
          'High-Confidence Errors (|pred - 0.5| > 0.3 AND wrong)')
     ]:
+        if col not in df_ece.columns:
+            ax.set_title(f'{title}\n(no data)', fontsize=11)
+            continue
         colors = ['#2ecc71' if a == config.SOURCE_ANATOMY else '#e74c3c'
                   for a in df_ece['anatomy']]
         bars = ax.bar(df_ece['anatomy'], df_ece[col],
@@ -1135,59 +1235,125 @@ def run_fracatlas_validation(model, config, device, output_dir):
     results = {}
 
     # ── Check if body_part info is available ─────────────────────────
+    # FracAtlas uses binary flag columns: hand=1, leg=1, shoulder=1, etc.
     body_parts_available = []
+    body_part_flag_cols  = []   # columns that are binary flags for body parts
+    df_meta = None
+
     if os.path.exists(config.FRACATLAS_CSV):
         df_meta = pd.read_csv(config.FRACATLAS_CSV)
         print(f"\n  FracAtlas CSV columns: {list(df_meta.columns)}")
 
-        bp_col = None
+        # Known anatomy flag columns in FracAtlas
+        known_anatomy_flags = ['hand', 'leg', 'hip', 'shoulder',
+                               'wrist', 'elbow', 'finger', 'forearm',
+                               'humerus', 'radius', 'ulna', 'tibia',
+                               'fibula', 'femur', 'ankle', 'foot']
         for col in df_meta.columns:
-            if any(k in col.lower() for k in ['body', 'part', 'anatomy', 'region', 'type']):
-                bp_col = col
-                break
+            if col.lower() in known_anatomy_flags:
+                # Check it's actually binary (0/1)
+                unique_vals = df_meta[col].dropna().unique()
+                if set(unique_vals).issubset({0, 1, 0.0, 1.0, True, False}):
+                    n_positive = int((df_meta[col] == 1).sum())
+                    if n_positive >= 10:
+                        body_part_flag_cols.append(col)
+                        body_parts_available.append(col)
 
-        if bp_col:
-            parts = df_meta[bp_col].dropna().unique()
-            body_parts_available = [str(p) for p in parts]
-            print(f"  Body parts found: {body_parts_available}")
+        if body_part_flag_cols:
+            print(f"  Body part flag columns found: {body_part_flag_cols}")
+            for col in body_part_flag_cols:
+                n = int((df_meta[col] == 1).sum())
+                print(f"    {col}: {n} images")
         else:
-            print(f"  No body part column found — using all images as single set.")
+            print(f"  No body part flag columns found — using all images as single set.")
 
-    # ── Whole-dataset evaluation (always run) ────────────────────────
-    print(f"\n  Evaluating on full FracAtlas test set...")
+    # ── Whole-dataset evaluation using ALL FracAtlas images ─────────────
+    # The split CSVs in FracAtlas separate FRACTURE images only (no normals
+    # in test split). For external validation we need both classes, so we
+    # load ALL images and use our own 80/20 stratified split.
+    print(f"\n  Evaluating on full FracAtlas dataset (all images, 80/20 split)...")
     try:
-        test_set = FracAtlasDataset(config, split='test')
-        if len(test_set) == 0:
-            raise ValueError("FracAtlas test set is empty")
+        # Build full dataset ignoring split CSVs to ensure both classes present
+        all_fracture = [
+            (os.path.join(config.FRACATLAS_FRACTURED, f), 1.0)
+            for f in os.listdir(config.FRACATLAS_FRACTURED)
+            if f.lower().endswith(('.jpg', '.jpeg', '.png'))
+        ]
+        all_normal = [
+            (os.path.join(config.FRACATLAS_NORMAL, f), 0.0)
+            for f in os.listdir(config.FRACATLAS_NORMAL)
+            if f.lower().endswith(('.jpg', '.jpeg', '.png'))
+        ]
+        print(f"  FracAtlas total: {len(all_fracture)} fracture, "
+              f"{len(all_normal)} normal")
 
-        test_loader = make_loader(test_set, config.BATCH_SIZE, False,
-                                  num_workers=config.NUM_WORKERS)
+        # Stratified 80/20 split
+        rng = np.random.default_rng(42)
+        frac_idx   = rng.permutation(len(all_fracture))
+        normal_idx = rng.permutation(len(all_normal))
+        n_frac_test   = max(1, int(0.2 * len(all_fracture)))
+        n_normal_test = max(1, int(0.2 * len(all_normal)))
+
+        test_samples = (
+            [all_fracture[i] for i in frac_idx[:n_frac_test]] +
+            [all_normal[i]   for i in normal_idx[:n_normal_test]]
+        )
+        print(f"  Test split: {n_frac_test} fracture + {n_normal_test} normal "
+              f"= {len(test_samples)} total")
+
+        # Use module-level dataset class (required for Windows multiprocessing pickle)
+        # num_workers=0 avoids spawn overhead for a single evaluation pass
+        test_ds     = FracAtlasSimpleDataset(test_samples)
+        test_loader = make_loader(test_ds, config.BATCH_SIZE, False, num_workers=0)
         result_all  = evaluate(model, test_loader, device)
 
         results['all'] = result_all
-        print(f"  FracAtlas (all): AUC={result_all['auc']:.4f}  "
-              f"Sens={result_all['sensitivity']:.4f}  "
-              f"Spec={result_all['specificity']:.4f}")
+        auc_str  = f"{result_all['auc']:.4f}"  if not np.isnan(result_all['auc'])  else 'N/A'
+        sens_str = f"{result_all['sensitivity']:.4f}" if not np.isnan(result_all['sensitivity']) else 'N/A'
+        spec_str = f"{result_all['specificity']:.4f}" if not np.isnan(result_all['specificity']) else 'N/A'
+        print(f"  FracAtlas (all): AUC={auc_str}  Sens={sens_str}  Spec={spec_str}")
 
     except Exception as e:
+        import traceback
         print(f"  [ERROR] FracAtlas evaluation failed: {e}")
-        print("  Check that FRACATLAS_BASE path is correct in JournalConfig.")
+        traceback.print_exc()
         return {}
 
-    # ── Per-body-part evaluation (if available) ────────────────────
-    if body_parts_available:
+    # ── Per-body-part evaluation ──────────────────────────────────────
+    if body_part_flag_cols and df_meta is not None:
         print(f"\n  Per-body-part evaluation...")
-        for part in body_parts_available:
+        id_col = 'image_id' if 'image_id' in df_meta.columns else df_meta.columns[0]
+
+        for part in body_part_flag_cols:
             try:
-                part_set = FracAtlasDataset(config, split='test',
-                                            body_part_filter=part)
-                if len(part_set) < 10:
+                part_ids = set(
+                    df_meta[df_meta[part] == 1][id_col].astype(str).tolist()
+                )
+
+                def _id_match(fname, id_set=part_ids):
+                    stem = os.path.splitext(fname)[0]
+                    return stem in id_set or fname in id_set
+
+                part_fracture = [(p, l) for p, l in all_fracture
+                                 if _id_match(os.path.basename(p))]
+                part_normal   = [(p, l) for p, l in all_normal
+                                 if _id_match(os.path.basename(p))]
+
+                print(f"    {part}: {len(part_fracture)} fracture, "
+                      f"{len(part_normal)} normal")
+
+                if len(part_fracture) + len(part_normal) < 10:
                     continue
-                loader  = make_loader(part_set, config.BATCH_SIZE, False)
-                result  = evaluate(model, loader, device)
+
+                part_samples = part_fracture + part_normal
+                part_ds  = FracAtlasSimpleDataset(part_samples)
+                loader   = make_loader(part_ds, config.BATCH_SIZE, False, num_workers=0)
+                result   = evaluate(model, loader, device)
                 results[part] = result
-                print(f"    {part}: AUC={result['auc']:.4f}  "
-                      f"n={len(part_set)}")
+
+                auc_str = f"{result['auc']:.4f}" if not np.isnan(result['auc']) else 'N/A'
+                print(f"    → AUC={auc_str}  n={len(part_samples)}")
+
             except Exception as e:
                 print(f"    {part}: failed ({e})")
 
@@ -1200,6 +1366,8 @@ def run_fracatlas_validation(model, config, device, output_dir):
     # Save summary CSV
     summary_rows = []
     for key, res in results.items():
+        tp = res.get('tp', 0)
+        fn = res.get('fn', 0)
         summary_rows.append({
             'dataset':     'FracAtlas',
             'subset':      key,
@@ -1208,8 +1376,7 @@ def run_fracatlas_validation(model, config, device, output_dir):
             'specificity': res.get('specificity', np.nan),
             'ppv':         res.get('ppv', np.nan),
             'npv':         res.get('npv', np.nan),
-            'fn_rate':     res['fn'] / max(res['tp'] + res['fn'], 1)
-                           if 'fn' in res else np.nan,
+            'fn_rate':     fn / max(tp + fn, 1) if (tp + fn) > 0 else np.nan,
         })
     df_summary = pd.DataFrame(summary_rows)
     df_summary.to_csv(os.path.join(ext_dir, 'fracatlas_results.csv'), index=False)
