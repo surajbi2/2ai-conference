@@ -1,0 +1,2 @@
+arch,graz_n_images,graz_n_fracture,graz_auc,graz_sensitivity,graz_specificity,graz_ppv,graz_npv,graz_fn_rate_pct,graz_high_conf_fn_pct,mura_src_auc,auc_degradation_pct
+swin_t,3950,2610,0.8208486304111626,0.9325670498084291,0.3701492537313433,0.7425259304453935,0.7380952380952381,6.743295019157087,24.431818181818183,0.872,5.86598275101346

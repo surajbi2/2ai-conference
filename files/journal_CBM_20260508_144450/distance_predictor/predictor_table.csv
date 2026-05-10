@@ -1,0 +1,4 @@
+target,median_dist,most_common_winner,mean_improvement,dist_tier
+XR_ELBOW,0.29739925614085017,ft_source_reg,0.05563598519888995,LOW (similar anatomy)
+XR_HAND,0.3659878542692738,vanilla_ft,0.02846437194530682,MEDIUM (partial shift)
+XR_SHOULDER,0.4337240430667794,ft_source_reg,0.1336039939977843,HIGH (large shift)

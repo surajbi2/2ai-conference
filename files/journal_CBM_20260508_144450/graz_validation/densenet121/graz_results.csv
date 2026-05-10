@@ -1,0 +1,2 @@
+arch,graz_n_images,graz_n_fracture,graz_auc,graz_sensitivity,graz_specificity,graz_ppv,graz_npv,graz_fn_rate_pct,graz_high_conf_fn_pct,mura_src_auc,auc_degradation_pct
+densenet121,3950,2610,0.8444310058900899,0.9007662835249042,0.517910447761194,0.7844511177844511,0.7282266526757608,9.923371647509578,62.16216216216216,0.872,3.161581893338314

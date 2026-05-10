@@ -1,0 +1,2 @@
+arch,graz_n_images,graz_n_fracture,graz_auc,graz_sensitivity,graz_specificity,graz_ppv,graz_npv,graz_fn_rate_pct,graz_high_conf_fn_pct,mura_src_auc,auc_degradation_pct
+resnet50,3950,2610,0.8148926345285069,0.8264367816091954,0.6014925373134329,0.8015607580824972,0.6401906274821286,17.35632183908046,64.90066225165563,0.872,6.54900980177673

@@ -1,0 +1,13 @@
+target,n_samples,top_winner,n_agree,n_archs,consistency
+XR_ELBOW,50,vanilla_ft,1,3,0.3333333333333333
+XR_ELBOW,100,ft_source_reg,3,3,1.0
+XR_ELBOW,200,ft_source_reg,3,3,1.0
+XR_ELBOW,500,vanilla_ft,2,3,0.6666666666666666
+XR_SHOULDER,50,ft_source_reg,2,3,0.6666666666666666
+XR_SHOULDER,100,ft_source_reg,2,3,0.6666666666666666
+XR_SHOULDER,200,ft_source_reg,3,3,1.0
+XR_SHOULDER,500,vanilla_ft,3,3,1.0
+XR_HAND,50,cc_dann,1,3,0.3333333333333333
+XR_HAND,100,mkmmd,1,3,0.3333333333333333
+XR_HAND,200,vanilla_ft,2,3,0.6666666666666666
+XR_HAND,500,vanilla_ft,2,3,0.6666666666666666

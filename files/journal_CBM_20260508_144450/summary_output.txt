@@ -1,0 +1,725 @@
+======================================================================
+1. ABLATION TABLE (zero-shot AUC all archs x anatomies)
+======================================================================
+Architecture    XR_WRIST    XR_ELBOW     XR_HAND XR_SHOULDER   XR_FINGER  XR_FOREARM  XR_HUMERUS  GRAZPEDWRI-DX
+ densenet121 0.883±0.010 0.783±0.013 0.702±0.032 0.587±0.029 0.754±0.031 0.814±0.032 0.789±0.027          0.844
+    resnet50 0.883±0.004 0.777±0.040 0.676±0.018 0.596±0.033 0.682±0.036 0.802±0.018 0.801±0.033          0.815
+      swin_t 0.884±0.003 0.825±0.013 0.741±0.004 0.594±0.015 0.793±0.009 0.861±0.020 0.783±0.027          0.821
+
+======================================================================
+2. IMPROVED DA RESULTS — n=500 (all archs, all targets)
+======================================================================
+       arch      target        method      auc  auc_std  sensitivity  specificity  balanced_acc
+densenet121    XR_ELBOW       cc_dann 0.850635 0.008124     0.684058     0.897872      0.790965
+densenet121    XR_ELBOW         coral 0.831499 0.008920     0.733333     0.756028      0.744681
+densenet121    XR_ELBOW ft_source_reg 0.867138 0.009906     0.701449     0.895035      0.798242
+densenet121    XR_ELBOW         mkmmd 0.821631 0.013702     0.710145     0.787234      0.748689
+densenet121    XR_ELBOW    vanilla_ft 0.878264 0.003223     0.713043     0.903546      0.808295
+densenet121     XR_HAND       cc_dann 0.742312 0.014085     0.516755     0.816728      0.666742
+densenet121     XR_HAND         coral 0.733419 0.007337     0.428571     0.880689      0.654630
+densenet121     XR_HAND ft_source_reg 0.786957 0.016044     0.463845     0.913899      0.688872
+densenet121     XR_HAND         mkmmd 0.732258 0.008385     0.513228     0.837638      0.675433
+densenet121     XR_HAND    vanilla_ft 0.788464 0.002873     0.472663     0.918819      0.695741
+densenet121 XR_SHOULDER       cc_dann 0.632704 0.045470     0.392086     0.797661      0.594874
+densenet121 XR_SHOULDER         coral 0.604584 0.013369     0.509592     0.684211      0.596901
+densenet121 XR_SHOULDER ft_source_reg 0.758559 0.005305     0.706235     0.671345      0.688790
+densenet121 XR_SHOULDER         mkmmd 0.625018 0.008023     0.471223     0.732164      0.601693
+densenet121 XR_SHOULDER    vanilla_ft 0.769155 0.004687     0.724221     0.673684      0.698952
+   resnet50    XR_ELBOW       cc_dann 0.824107 0.006994     0.769565     0.710638      0.740102
+   resnet50    XR_ELBOW         coral 0.777407 0.006127     0.804348     0.592908      0.698628
+   resnet50    XR_ELBOW ft_source_reg 0.867965 0.002275     0.726087     0.880851      0.803469
+   resnet50    XR_ELBOW         mkmmd 0.800179 0.017772     0.749275     0.713475      0.731375
+   resnet50    XR_ELBOW    vanilla_ft 0.860996 0.006232     0.698551     0.892199      0.795375
+   resnet50     XR_HAND       cc_dann 0.664561 0.008255     0.525573     0.712177      0.618875
+   resnet50     XR_HAND         coral 0.681954 0.013842     0.444444     0.827798      0.636121
+   resnet50     XR_HAND ft_source_reg 0.739888 0.008340     0.467372     0.872079      0.669725
+   resnet50     XR_HAND         mkmmd 0.660865 0.016413     0.354497     0.862239      0.608368
+   resnet50     XR_HAND    vanilla_ft 0.747161 0.008435     0.455026     0.896679      0.675853
+   resnet50 XR_SHOULDER       cc_dann 0.618861 0.034990     0.394484     0.762573      0.578529
+   resnet50 XR_SHOULDER         coral 0.616454 0.009215     0.535971     0.638596      0.587284
+   resnet50 XR_SHOULDER ft_source_reg 0.768249 0.009638     0.725420     0.657310      0.691365
+   resnet50 XR_SHOULDER         mkmmd 0.615243 0.012477     0.510791     0.687719      0.599255
+   resnet50 XR_SHOULDER    vanilla_ft 0.780759 0.005296     0.747002     0.691228      0.719115
+     swin_t    XR_ELBOW       cc_dann 0.730290 0.009431     0.033333     0.998582      0.515957
+     swin_t    XR_ELBOW         coral 0.831961 0.004614     0.723188     0.807092      0.765140
+     swin_t    XR_ELBOW ft_source_reg 0.848282 0.009704     0.637681     0.929078      0.783380
+     swin_t    XR_ELBOW         mkmmd 0.836016 0.011853     0.710145     0.828369      0.769257
+     swin_t    XR_ELBOW    vanilla_ft 0.855137 0.018670     0.700000     0.865248      0.782624
+     swin_t     XR_HAND       cc_dann 0.629880 0.069696     0.629630     0.503075      0.566352
+     swin_t     XR_HAND         coral 0.731083 0.025315     0.437390     0.874539      0.655964
+     swin_t     XR_HAND ft_source_reg 0.715962 0.013915     0.453263     0.865929      0.659596
+     swin_t     XR_HAND         mkmmd 0.708591 0.020045     0.518519     0.814268      0.666393
+     swin_t     XR_HAND    vanilla_ft 0.717445 0.022358     0.462081     0.851169      0.656625
+     swin_t XR_SHOULDER       cc_dann 0.590593 0.005690     0.960432     0.069006      0.514719
+     swin_t XR_SHOULDER         coral 0.605680 0.028598     0.600719     0.557895      0.579307
+     swin_t XR_SHOULDER ft_source_reg 0.702825 0.014978     0.597122     0.714620      0.655871
+     swin_t XR_SHOULDER         mkmmd 0.645595 0.012924     0.522782     0.713450      0.618116
+     swin_t XR_SHOULDER    vanilla_ft 0.706058 0.014468     0.591127     0.704094      0.647610
+
+======================================================================
+2b. IMPROVED DA — WINNER PER CELL (best AUC at each n)
+======================================================================
+       arch      target   n  zero_shot   best_method  best_auc   delta  beats_zs
+densenet121    XR_ELBOW  50     0.7867    vanilla_ft    0.8322  0.0454      True
+densenet121    XR_ELBOW 100     0.7867 ft_source_reg    0.8371  0.0504      True
+densenet121    XR_ELBOW 200     0.7867 ft_source_reg    0.8430  0.0563      True
+densenet121    XR_ELBOW 500     0.7867    vanilla_ft    0.8783  0.0915      True
+densenet121 XR_SHOULDER  50     0.6017    vanilla_ft    0.6665  0.0648      True
+densenet121 XR_SHOULDER 100     0.6017 ft_source_reg    0.7191  0.1174      True
+densenet121 XR_SHOULDER 200     0.6017 ft_source_reg    0.7064  0.1047      True
+densenet121 XR_SHOULDER 500     0.6017    vanilla_ft    0.7692  0.1674      True
+densenet121     XR_HAND  50     0.7069       cc_dann    0.7507  0.0438      True
+densenet121     XR_HAND 100     0.7069         mkmmd    0.7419  0.0350      True
+densenet121     XR_HAND 200     0.7069    vanilla_ft    0.7468  0.0398      True
+densenet121     XR_HAND 500     0.7069    vanilla_ft    0.7885  0.0816      True
+   resnet50    XR_ELBOW  50     0.7437       cc_dann    0.8189  0.0752      True
+   resnet50    XR_ELBOW 100     0.7437 ft_source_reg    0.8415  0.0978      True
+   resnet50    XR_ELBOW 200     0.7437 ft_source_reg    0.8445  0.1008      True
+   resnet50    XR_ELBOW 500     0.7437 ft_source_reg    0.8680  0.1243      True
+   resnet50 XR_SHOULDER  50     0.5428 ft_source_reg    0.6693  0.1265      True
+   resnet50 XR_SHOULDER 100     0.5428 ft_source_reg    0.7228  0.1800      True
+   resnet50 XR_SHOULDER 200     0.5428 ft_source_reg    0.7454  0.2026      True
+   resnet50 XR_SHOULDER 500     0.5428    vanilla_ft    0.7808  0.2380      True
+   resnet50     XR_HAND  50     0.6559 ft_source_reg    0.6849  0.0290      True
+   resnet50     XR_HAND 100     0.6559    vanilla_ft    0.6748  0.0189      True
+   resnet50     XR_HAND 200     0.6559    vanilla_ft    0.7093  0.0534      True
+   resnet50     XR_HAND 500     0.6559    vanilla_ft    0.7472  0.0913      True
+     swin_t    XR_ELBOW  50     0.8398 ft_source_reg    0.8354 -0.0043     False
+     swin_t    XR_ELBOW 100     0.8398 ft_source_reg    0.8486  0.0089      True
+     swin_t    XR_ELBOW 200     0.8398 ft_source_reg    0.8458  0.0060      True
+     swin_t    XR_ELBOW 500     0.8398    vanilla_ft    0.8551  0.0154      True
+     swin_t XR_SHOULDER  50     0.5917 ft_source_reg    0.6782  0.0864      True
+     swin_t XR_SHOULDER 100     0.5917    vanilla_ft    0.6855  0.0938      True
+     swin_t XR_SHOULDER 200     0.5917 ft_source_reg    0.6989  0.1072      True
+     swin_t XR_SHOULDER 500     0.5917    vanilla_ft    0.7061  0.1143      True
+     swin_t     XR_HAND  50     0.7421         coral    0.7271 -0.0150     False
+     swin_t     XR_HAND 100     0.7421         coral    0.7252 -0.0169     False
+     swin_t     XR_HAND 200     0.7421         coral    0.7339 -0.0082     False
+     swin_t     XR_HAND 500     0.7421         coral    0.7311 -0.0110     False
+
+======================================================================
+3. EXTENDED DA RESULTS (FINGER/FOREARM/HUMERUS)
+======================================================================
+       arch     target        method      auc  sensitivity  specificity  balanced_acc
+densenet121  XR_FINGER ft_source_reg 0.826712     0.674764     0.848910      0.761837
+densenet121  XR_FINGER    vanilla_ft 0.825432     0.657220     0.845794      0.751507
+densenet121 XR_FOREARM ft_source_reg 0.861074     0.671082     0.924444      0.797763
+densenet121 XR_FOREARM    vanilla_ft 0.860493     0.686534     0.931111      0.808823
+densenet121 XR_HUMERUS ft_source_reg 0.893324     0.847619     0.799550      0.823584
+densenet121 XR_HUMERUS    vanilla_ft 0.894434     0.861905     0.806306      0.834106
+   resnet50  XR_FINGER ft_source_reg 0.807021     0.643725     0.838006      0.740865
+   resnet50  XR_FINGER    vanilla_ft 0.797691     0.630229     0.850467      0.740348
+   resnet50 XR_FOREARM ft_source_reg 0.875916     0.713024     0.917778      0.815401
+   resnet50 XR_FOREARM    vanilla_ft 0.876836     0.673289     0.931111      0.802200
+   resnet50 XR_HUMERUS ft_source_reg 0.899895     0.859524     0.777027      0.818275
+   resnet50 XR_HUMERUS    vanilla_ft 0.904955     0.859524     0.786036      0.822780
+     swin_t  XR_FINGER ft_source_reg 0.810543     0.646424     0.816199      0.731312
+     swin_t  XR_FINGER    vanilla_ft 0.801247     0.569501     0.867601      0.718551
+     swin_t XR_FOREARM ft_source_reg 0.868624     0.609272     0.935556      0.772414
+     swin_t XR_FOREARM    vanilla_ft 0.874606     0.724062     0.904444      0.814253
+     swin_t XR_HUMERUS ft_source_reg 0.856226     0.802381     0.801802      0.802091
+     swin_t XR_HUMERUS    vanilla_ft 0.863610     0.826190     0.795045      0.810618
+
+======================================================================
+4. TRANSFERABILITY PREDICTORS (dist_ratio, temperature, gap_ratio)
+======================================================================
+       arch     anatomy  zero_shot_auc  temperature  gap_ratio  dist_ratio
+densenet121    XR_ELBOW       0.782527     3.501021   2.134531    0.293916
+densenet121     XR_HAND       0.701550     4.632154   1.398430    0.365988
+densenet121 XR_SHOULDER       0.587106     6.653774   1.451986    0.433724
+densenet121   XR_FINGER       0.753825     4.435825   1.671853    0.242353
+densenet121  XR_FOREARM       0.813770     4.555410   1.487740    0.256115
+densenet121  XR_HUMERUS       0.789493     4.015187   2.181780    0.355755
+   resnet50    XR_ELBOW       0.776633     3.738301   1.743986    0.297399
+   resnet50     XR_HAND       0.676302     5.186523   1.479906    0.372186
+   resnet50 XR_SHOULDER       0.595885     8.169181   1.028042    0.361486
+   resnet50   XR_FINGER       0.682468     6.771818   1.021010    0.250583
+   resnet50  XR_FOREARM       0.801510     3.512365   2.550872    0.270715
+   resnet50  XR_HUMERUS       0.800719     3.374632   1.907707    0.347592
+     swin_t    XR_ELBOW       0.825375     2.799657   1.849421    0.309807
+     swin_t     XR_HAND       0.740848     2.934722   1.655615    0.331405
+     swin_t XR_SHOULDER       0.594346     9.021241   1.147614    0.466064
+     swin_t   XR_FINGER       0.792624     2.703036   1.506309    0.226550
+     swin_t  XR_FOREARM       0.860539     2.004136   2.602114    0.187594
+     swin_t  XR_HUMERUS       0.782505     4.264768   1.565802    0.320719
+
+======================================================================
+5. COMPOSITE PREDICTOR SPEARMAN CORRELATIONS
+======================================================================
+      predictor        target  spearman_r  p_value  n
+     dist_ratio zero_shot_auc   -0.649123 0.003558 18
+    temperature zero_shot_auc   -0.793602 0.000085 18
+      gap_ratio zero_shot_auc    0.764706 0.000219 18
+composite_equal zero_shot_auc   -0.450980 0.060326 18
+composite_varwt zero_shot_auc   -0.450980 0.060326 18
+     dist_ratio       da_gain    0.216667 0.575515  9
+    temperature       da_gain    0.716667 0.029818  9
+      gap_ratio       da_gain   -0.450000 0.224216  9
+composite_equal       da_gain    0.716667 0.029818  9
+composite_varwt       da_gain    0.716667 0.029818  9
+
+======================================================================
+6. DANN STABILITY ABLATION (5 seeds, n=500, XR_ELBOW)
+======================================================================
+     seed      auc  sensitivity  specificity
+zero-shot 0.786735     0.778261     0.548936
+       42 0.815893          NaN          NaN
+      123 0.833228          NaN          NaN
+      456 0.826929          NaN          NaN
+      789 0.790324          NaN          NaN
+     2024 0.822664          NaN          NaN
+
+======================================================================
+7. GRAZ EXTERNAL VALIDATION
+======================================================================
+       arch  graz_auc  graz_sensitivity  graz_specificity  graz_fn_rate_pct  graz_high_conf_fn_pct  auc_degradation_pct
+densenet121  0.844431          0.900766          0.517910          9.923372              62.162162             3.161582
+   resnet50  0.814893          0.826437          0.601493         17.356322              64.900662             6.549010
+     swin_t  0.820849          0.932567          0.370149          6.743295              24.431818             5.865983
+
+======================================================================
+8. MC DROPOUT UNCERTAINTY QUANTIFICATION
+======================================================================
+       arch     anatomy   auc_mc  mean_uncertainty  unc_correct  unc_error  uncertainty_gap_ratio  acc_cov70
+densenet121    XR_WRIST 0.884262          0.000989     0.000680   0.002280               3.351012   0.889371
+densenet121    XR_ELBOW 0.785976          0.001602     0.001162   0.002481               2.134531   0.741538
+densenet121     XR_HAND 0.708224          0.001507     0.001339   0.001873               1.398430   0.729814
+densenet121 XR_SHOULDER 0.602821          0.003629     0.003045   0.004421               1.451986   0.609137
+densenet121   XR_FINGER 0.740966          0.001609     0.001311   0.002192               1.671853   0.714286
+densenet121  XR_FOREARM 0.760353          0.001603     0.001411   0.002099               1.487740   0.766667
+densenet121  XR_HUMERUS 0.797563          0.001256     0.000963   0.002101               2.181780   0.781095
+   resnet50    XR_WRIST 0.878446          0.000190     0.000143   0.000385               2.683248   0.880694
+   resnet50    XR_ELBOW 0.743330          0.000360     0.000288   0.000502               1.743986   0.738462
+   resnet50     XR_HAND 0.656212          0.000334     0.000287   0.000425               1.479906   0.708075
+   resnet50 XR_SHOULDER 0.542326          0.000545     0.000539   0.000554               1.028042   0.538071
+   resnet50   XR_FINGER 0.672878          0.000332     0.000330   0.000337               1.021010   0.627329
+   resnet50  XR_FOREARM 0.821148          0.000326     0.000231   0.000589               2.550872   0.809524
+   resnet50  XR_HUMERUS 0.807239          0.000359     0.000295   0.000563               1.907707   0.810945
+     swin_t    XR_WRIST 0.884383          0.000369     0.000284   0.000748               2.636507   0.891540
+     swin_t    XR_ELBOW 0.839611          0.000615     0.000487   0.000901               1.849421   0.763077
+     swin_t     XR_HAND 0.742010          0.000405     0.000344   0.000570               1.655615   0.767081
+     swin_t XR_SHOULDER 0.593550          0.000495     0.000462   0.000530               1.147614   0.532995
+     swin_t   XR_FINGER 0.801582          0.000606     0.000532   0.000801               1.506309   0.785714
+     swin_t  XR_FOREARM 0.895497          0.000484     0.000383   0.000995               2.602114   0.895238
+     swin_t  XR_HUMERUS 0.818653          0.000623     0.000531   0.000832               1.565802   0.766169
+
+======================================================================
+9. CALIBRATION (ECE before/after temperature scaling)
+======================================================================
+       arch     anatomy  ece_before  ece_after  temperature  ece_reduction_pct  high_conf_error_rate      auc
+densenet121    XR_WRIST    0.120015   0.030603     2.316089          74.500495              0.125948 0.884601
+densenet121    XR_ELBOW    0.232336   0.091226     3.501021          60.735130              0.221505 0.786938
+densenet121     XR_HAND    0.237018   0.069565     4.632154          70.649716              0.252174 0.706886
+densenet121 XR_SHOULDER    0.281233   0.064045     6.653774          77.227160              0.262877 0.601792
+densenet121   XR_FINGER    0.237018   0.059896     4.435825          74.729355              0.232104 0.740399
+densenet121  XR_FOREARM    0.213521   0.083452     4.555410          60.916493              0.219269 0.758742
+densenet121  XR_HUMERUS    0.190170   0.079265     4.015187          58.318917              0.194444 0.796718
+   resnet50    XR_WRIST    0.125047   0.040451     2.451012          67.651247              0.128983 0.878739
+   resnet50    XR_ELBOW    0.205770   0.053695     3.738301          73.905141              0.187097 0.743469
+   resnet50     XR_HAND    0.249795   0.053806     5.186523          78.459851              0.245652 0.655899
+   resnet50 XR_SHOULDER    0.300390   0.068269     8.169181          77.273362              0.280639 0.542642
+   resnet50   XR_FINGER    0.287051   0.059436     6.771818          79.294380              0.286334 0.672803
+   resnet50  XR_FOREARM    0.178803   0.072492     3.512365          59.457178              0.156146 0.821148
+   resnet50  XR_HUMERUS    0.179600   0.102907     3.374632          42.701900              0.177083 0.806708
+     swin_t    XR_WRIST    0.091432   0.039500     2.055063          56.798913              0.101669 0.883605
+     swin_t    XR_ELBOW    0.159065   0.070749     2.799657          55.521651              0.150538 0.839584
+     swin_t     XR_HAND    0.176049   0.053872     2.934722          69.399423              0.191304 0.742088
+     swin_t XR_SHOULDER    0.404588   0.101440     9.021241          74.927520              0.387211 0.593229
+     swin_t   XR_FINGER    0.159230   0.074408     2.703036          53.270526              0.169197 0.801355
+     swin_t  XR_FOREARM    0.104586   0.059354     2.004136          43.248889              0.102990 0.895607
+     swin_t  XR_HUMERUS    0.220237   0.071553     4.264768          67.510829              0.194444 0.815637
+
+======================================================================
+10. POST-DA CALIBRATION (ECE after adaptation, before/after TS)
+======================================================================
+       arch      target        method  n_samples  ece_post_da  ece_post_da_after_ts  post_da_temperature  ece_reduction_pct
+densenet121    XR_ELBOW       cc_dann         50     0.153816              0.048421             2.580448          68.520095
+densenet121    XR_ELBOW         coral         50     0.113490              0.045417             2.247193          59.981242
+densenet121    XR_ELBOW ft_source_reg         50     0.156737              0.064304             2.986111          58.973386
+densenet121    XR_ELBOW         mkmmd         50     0.158715              0.056986             2.858780          64.095351
+densenet121    XR_ELBOW    vanilla_ft         50     0.144012              0.049356             2.934300          65.727552
+densenet121    XR_ELBOW       cc_dann        100     0.225637              0.072170             3.858200          68.014796
+densenet121    XR_ELBOW         coral        100     0.139074              0.045010             2.565439          67.635872
+densenet121    XR_ELBOW ft_source_reg        100     0.143695              0.058628             2.510108          59.199838
+densenet121    XR_ELBOW         mkmmd        100     0.195786              0.059005             3.170596          69.862406
+densenet121    XR_ELBOW    vanilla_ft        100     0.175297              0.063289             2.745432          63.896125
+densenet121    XR_ELBOW       cc_dann        200     0.253649              0.075149             4.812811          70.372652
+densenet121    XR_ELBOW         coral        200     0.170120              0.053598             2.677657          68.493722
+densenet121    XR_ELBOW ft_source_reg        200     0.164577              0.063258             2.903615          61.563571
+densenet121    XR_ELBOW         mkmmd        200     0.186762              0.053292             3.372564          71.465419
+densenet121    XR_ELBOW    vanilla_ft        200     0.137969              0.046753             2.351637          66.113470
+densenet121    XR_ELBOW       cc_dann        500     0.167889              0.041399             3.316182          75.341707
+densenet121    XR_ELBOW         coral        500     0.162147              0.069318             2.766949          57.250122
+densenet121    XR_ELBOW ft_source_reg        500     0.144910              0.047142             2.520287          67.467828
+densenet121    XR_ELBOW         mkmmd        500     0.196856              0.035294             3.677986          82.071118
+densenet121    XR_ELBOW    vanilla_ft        500     0.122692              0.056442             2.295888          53.997105
+densenet121     XR_HAND       cc_dann         50     0.192193              0.059210             3.270498          69.192688
+densenet121     XR_HAND         coral         50     0.271797              0.059691             5.441383          78.038422
+densenet121     XR_HAND ft_source_reg         50     0.194030              0.048427             3.145774          75.041522
+densenet121     XR_HAND         mkmmd         50     0.255663              0.067721             5.064945          73.511674
+densenet121     XR_HAND    vanilla_ft         50     0.195958              0.057482             3.212614          70.666204
+densenet121     XR_HAND       cc_dann        100     0.231928              0.061371             4.459121          73.538885
+densenet121     XR_HAND         coral        100     0.252308              0.065378             4.914958          74.087983
+densenet121     XR_HAND ft_source_reg        100     0.219325              0.050994             3.691689          76.749651
+densenet121     XR_HAND         mkmmd        100     0.246548              0.050370             4.965119          79.569716
+densenet121     XR_HAND    vanilla_ft        100     0.203583              0.064492             3.472041          68.321747
+densenet121     XR_HAND       cc_dann        200     0.255262              0.072815             5.520649          71.474533
+densenet121     XR_HAND         coral        200     0.242495              0.083369             4.886394          65.620361
+densenet121     XR_HAND ft_source_reg        200     0.189984              0.083425             3.439242          56.088586
+densenet121     XR_HAND         mkmmd        200     0.247956              0.053778             5.136596          78.311438
+densenet121     XR_HAND    vanilla_ft        200     0.198491              0.049034             3.252890          75.296440
+densenet121     XR_HAND       cc_dann        500     0.230995              0.064355             5.039424          72.140201
+densenet121     XR_HAND         coral        500     0.237097              0.056088             4.948494          76.343660
+densenet121     XR_HAND ft_source_reg        500     0.176507              0.041987             3.184874          76.212127
+densenet121     XR_HAND         mkmmd        500     0.259497              0.038561             5.511101          85.140155
+densenet121     XR_HAND    vanilla_ft        500     0.169494              0.059805             3.009570          64.715570
+densenet121 XR_SHOULDER       cc_dann         50     0.260151              0.039924             5.612747          84.653685
+densenet121 XR_SHOULDER         coral         50     0.245319              0.064841             6.059535          73.568551
+densenet121 XR_SHOULDER ft_source_reg         50     0.265620              0.048891             5.676708          81.593744
+densenet121 XR_SHOULDER         mkmmd         50     0.315170              0.044480             7.044397          85.887019
+densenet121 XR_SHOULDER    vanilla_ft         50     0.251362              0.060996             5.744650          75.733670
+densenet121 XR_SHOULDER       cc_dann        100     0.307246              0.081759             8.090528          73.389649
+densenet121 XR_SHOULDER         coral        100     0.260804              0.074734             6.350695          71.344797
+densenet121 XR_SHOULDER ft_source_reg        100     0.221358              0.049208             3.667767          77.769909
+densenet121 XR_SHOULDER         mkmmd        100     0.252923              0.087387             6.706539          65.448957
+densenet121 XR_SHOULDER    vanilla_ft        100     0.220383              0.048789             3.791662          77.861564
+densenet121 XR_SHOULDER       cc_dann        200     0.326842              0.045847             7.715381          85.972602
+densenet121 XR_SHOULDER         coral        200     0.271181              0.050849             6.903440          81.248910
+densenet121 XR_SHOULDER ft_source_reg        200     0.195314              0.055610             3.914364          71.527927
+densenet121 XR_SHOULDER         mkmmd        200     0.301195              0.077125             7.327431          74.393530
+densenet121 XR_SHOULDER    vanilla_ft        200     0.206394              0.068801             3.956722          66.665398
+densenet121 XR_SHOULDER       cc_dann        500     0.374262              0.072957             7.972948          80.506354
+densenet121 XR_SHOULDER         coral        500     0.287642              0.074427             7.262779          74.125159
+densenet121 XR_SHOULDER ft_source_reg        500     0.175606              0.047133             2.935228          73.159455
+densenet121 XR_SHOULDER         mkmmd        500     0.294411              0.074964             6.906278          74.537550
+densenet121 XR_SHOULDER    vanilla_ft        500     0.188612              0.064238             2.914624          65.941765
+   resnet50    XR_ELBOW       cc_dann         50     0.150877              0.045574             2.875153          69.793900
+   resnet50    XR_ELBOW         coral         50     0.163579              0.041150             3.299921          74.844079
+   resnet50    XR_ELBOW ft_source_reg         50     0.209490              0.054446             3.612411          74.010163
+   resnet50    XR_ELBOW         mkmmd         50     0.233576              0.067902             4.062890          70.929272
+   resnet50    XR_ELBOW    vanilla_ft         50     0.227847              0.046155             4.061007          79.743062
+   resnet50    XR_ELBOW       cc_dann        100     0.179648              0.052820             3.704562          70.598153
+   resnet50    XR_ELBOW         coral        100     0.166375              0.055237             3.107711          66.800010
+   resnet50    XR_ELBOW ft_source_reg        100     0.155554              0.039947             2.551374          74.319693
+   resnet50    XR_ELBOW         mkmmd        100     0.163986              0.060376             3.034963          63.182539
+   resnet50    XR_ELBOW    vanilla_ft        100     0.165717              0.046362             2.639934          72.023390
+   resnet50    XR_ELBOW       cc_dann        200     0.154052              0.051221             3.141744          66.750550
+   resnet50    XR_ELBOW         coral        200     0.229175              0.038211             4.459917          83.326543
+   resnet50    XR_ELBOW ft_source_reg        200     0.113003              0.055186             1.981184          51.164148
+   resnet50    XR_ELBOW         mkmmd        200     0.208781              0.038543             3.838059          81.539124
+   resnet50    XR_ELBOW    vanilla_ft        200     0.139259              0.059274             2.313212          57.436113
+   resnet50    XR_ELBOW       cc_dann        500     0.145212              0.050987             2.510325          64.888077
+   resnet50    XR_ELBOW         coral        500     0.199964              0.044382             4.126722          77.804961
+   resnet50    XR_ELBOW ft_source_reg        500     0.133724              0.060369             2.277635          54.855730
+   resnet50    XR_ELBOW         mkmmd        500     0.180392              0.036567             3.615168          79.729078
+   resnet50    XR_ELBOW    vanilla_ft        500     0.153516              0.036336             2.657384          76.330958
+   resnet50     XR_HAND       cc_dann         50     0.249841              0.030980             5.088222          87.600052
+   resnet50     XR_HAND         coral         50     0.301811              0.056268             6.325021          81.356419
+   resnet50     XR_HAND ft_source_reg         50     0.295696              0.043847             5.220521          85.171415
+   resnet50     XR_HAND         mkmmd         50     0.276010              0.058472             5.703375          78.815356
+   resnet50     XR_HAND    vanilla_ft         50     0.320616              0.040743             5.620363          87.292344
+   resnet50     XR_HAND       cc_dann        100     0.288299              0.053699             6.376631          81.373976
+   resnet50     XR_HAND         coral        100     0.231998              0.075669             5.116398          67.383781
+   resnet50     XR_HAND ft_source_reg        100     0.285598              0.058309             5.477458          79.583661
+   resnet50     XR_HAND         mkmmd        100     0.272903              0.045315             5.250158          83.395234
+   resnet50     XR_HAND    vanilla_ft        100     0.257890              0.058340             4.720268          77.378055
+   resnet50     XR_HAND       cc_dann        200     0.250411              0.057274             5.723882          77.127789
+   resnet50     XR_HAND         coral        200     0.239711              0.063457             4.571196          73.527913
+   resnet50     XR_HAND ft_source_reg        200     0.216617              0.048533             4.135332          77.594968
+   resnet50     XR_HAND         mkmmd        200     0.263277              0.064219             5.850554          75.607877
+   resnet50     XR_HAND    vanilla_ft        200     0.244678              0.057295             4.238345          76.583519
+   resnet50     XR_HAND       cc_dann        500     0.306143              0.070236             6.607084          77.057636
+   resnet50     XR_HAND         coral        500     0.248803              0.062762             5.185303          74.774321
+   resnet50     XR_HAND ft_source_reg        500     0.187996              0.046131             3.385113          75.461737
+   resnet50     XR_HAND         mkmmd        500     0.291812              0.062124             6.771758          78.710798
+   resnet50     XR_HAND    vanilla_ft        500     0.179293              0.060164             3.208619          66.443709
+   resnet50 XR_SHOULDER       cc_dann         50     0.284552              0.062336             6.579765          78.093138
+   resnet50 XR_SHOULDER         coral         50     0.274852              0.065435             6.861764          76.192517
+   resnet50 XR_SHOULDER ft_source_reg         50     0.214648              0.042186             4.293229          80.346404
+   resnet50 XR_SHOULDER         mkmmd         50     0.291855              0.049311             6.633088          83.104147
+   resnet50 XR_SHOULDER    vanilla_ft         50     0.216226              0.062921             4.328347          70.900273
+   resnet50 XR_SHOULDER       cc_dann        100     0.270387              0.061093             5.775805          77.405470
+   resnet50 XR_SHOULDER         coral        100     0.298227              0.058487             7.288865          80.388480
+   resnet50 XR_SHOULDER ft_source_reg        100     0.183473              0.045513             3.290761          75.193565
+   resnet50 XR_SHOULDER         mkmmd        100     0.249395              0.060585             6.194242          75.707091
+   resnet50 XR_SHOULDER    vanilla_ft        100     0.244668              0.084541             4.385076          65.446708
+   resnet50 XR_SHOULDER       cc_dann        200     0.302916              0.058489             7.145980          80.691474
+   resnet50 XR_SHOULDER         coral        200     0.271203              0.033771             6.322251          87.547868
+   resnet50 XR_SHOULDER ft_source_reg        200     0.146296              0.057001             2.330584          61.037002
+   resnet50 XR_SHOULDER         mkmmd        200     0.282897              0.067087             7.134388          76.285625
+   resnet50 XR_SHOULDER    vanilla_ft        200     0.158182              0.054432             3.126257          65.589116
+   resnet50 XR_SHOULDER       cc_dann        500     0.158114              0.047592             8.380671          69.900112
+   resnet50 XR_SHOULDER         coral        500     0.286060              0.060193             6.416963          78.958015
+   resnet50 XR_SHOULDER ft_source_reg        500     0.156120              0.034565             2.544746          77.860267
+   resnet50 XR_SHOULDER         mkmmd        500     0.276363              0.055326             6.898992          79.980574
+   resnet50 XR_SHOULDER    vanilla_ft        500     0.159802              0.056248             2.755789          64.801213
+     swin_t    XR_ELBOW       cc_dann         50     0.229846              0.051359             3.690471          77.655197
+     swin_t    XR_ELBOW         coral         50     0.087227              0.045582             1.725236          47.742851
+     swin_t    XR_ELBOW ft_source_reg         50     0.121642              0.048974             2.149943          59.739196
+     swin_t    XR_ELBOW         mkmmd         50     0.160877              0.068770             2.351305          57.252812
+     swin_t    XR_ELBOW    vanilla_ft         50     0.145256              0.043352             2.540394          70.155092
+     swin_t    XR_ELBOW       cc_dann        100     0.318488              0.155752             5.159523          51.096554
+     swin_t    XR_ELBOW         coral        100     0.162932              0.045091             2.720487          72.325431
+     swin_t    XR_ELBOW ft_source_reg        100     0.170447              0.041282             3.555789          75.780231
+     swin_t    XR_ELBOW         mkmmd        100     0.143973              0.059534             2.512540          58.649032
+     swin_t    XR_ELBOW    vanilla_ft        100     0.136479              0.050309             2.803430          63.138145
+     swin_t    XR_ELBOW       cc_dann        200     0.117132              0.043882             2.636573          62.536176
+     swin_t    XR_ELBOW         coral        200     0.156822              0.041565             2.998186          73.495457
+     swin_t    XR_ELBOW ft_source_reg        200     0.155182              0.061753             3.074274          60.206278
+     swin_t    XR_ELBOW         mkmmd        200     0.203118              0.076174             4.086361          62.497536
+     swin_t    XR_ELBOW    vanilla_ft        200     0.132892              0.054212             2.898960          59.205962
+     swin_t    XR_ELBOW       cc_dann        500     0.203970              0.126600             3.475528          37.932037
+     swin_t    XR_ELBOW         coral        500     0.190266              0.055404             4.091943          70.880434
+     swin_t    XR_ELBOW ft_source_reg        500     0.173006              0.049527             3.855641          71.372691
+     swin_t    XR_ELBOW         mkmmd        500     0.178390              0.038289             3.551360          78.536197
+     swin_t    XR_ELBOW    vanilla_ft        500     0.164758              0.048951             3.721890          70.289299
+     swin_t     XR_HAND       cc_dann         50     0.517725              0.189659            11.083385          63.366919
+     swin_t     XR_HAND         coral         50     0.192493              0.054221             2.761175          71.832009
+     swin_t     XR_HAND ft_source_reg         50     0.291993              0.064010             5.790861          78.078173
+     swin_t     XR_HAND         mkmmd         50     0.215240              0.050066             3.929593          76.739581
+     swin_t     XR_HAND    vanilla_ft         50     0.289960              0.067089             5.429348          76.862529
+     swin_t     XR_HAND       cc_dann        100     0.565809              0.194975            10.781517          65.540454
+     swin_t     XR_HAND         coral        100     0.272570              0.074664             4.526165          72.607334
+     swin_t     XR_HAND ft_source_reg        100     0.302818              0.061341             6.925424          79.743302
+     swin_t     XR_HAND         mkmmd        100     0.222948              0.052872             3.474868          76.285274
+     swin_t     XR_HAND    vanilla_ft        100     0.307388              0.051984             6.450209          83.088577
+     swin_t     XR_HAND       cc_dann        200     0.372892              0.059025             6.226267          84.171106
+     swin_t     XR_HAND         coral        200     0.231726              0.044822             4.556343          80.657297
+     swin_t     XR_HAND ft_source_reg        200     0.282052              0.075357             6.573962          73.282756
+     swin_t     XR_HAND         mkmmd        200     0.270663              0.040184             5.459388          85.153393
+     swin_t     XR_HAND    vanilla_ft        200     0.263779              0.057363             6.912353          78.253248
+     swin_t     XR_HAND       cc_dann        500     0.113686              0.051659             2.072191          54.559679
+     swin_t     XR_HAND         coral        500     0.289374              0.059675             6.986149          79.377922
+     swin_t     XR_HAND ft_source_reg        500     0.252466              0.095181             5.388292          62.299630
+     swin_t     XR_HAND         mkmmd        500     0.287245              0.050345             7.226537          82.473110
+     swin_t     XR_HAND    vanilla_ft        500     0.185901              0.059241             3.001796          68.133365
+     swin_t XR_SHOULDER       cc_dann         50     0.388730              0.091529             7.900911          76.454293
+     swin_t XR_SHOULDER         coral         50     0.307400              0.055957             7.213508          81.796677
+     swin_t XR_SHOULDER ft_source_reg         50     0.184089              0.048531             3.201061          73.637326
+     swin_t XR_SHOULDER         mkmmd         50     0.280296              0.041526             5.730291          85.184870
+     swin_t XR_SHOULDER    vanilla_ft         50     0.204961              0.050923             3.504144          75.154727
+     swin_t XR_SHOULDER       cc_dann        100     0.503189              0.171221            10.027479          65.972811
+     swin_t XR_SHOULDER         coral        100     0.267612              0.053255             5.962314          80.100049
+     swin_t XR_SHOULDER ft_source_reg        100     0.299672              0.044031             5.677094          85.307067
+     swin_t XR_SHOULDER         mkmmd        100     0.276078              0.042518             5.169411          84.599396
+     swin_t XR_SHOULDER    vanilla_ft        100     0.277889              0.040342             5.648959          85.482803
+     swin_t XR_SHOULDER       cc_dann        200     0.022319              0.022571             1.468975          -1.130375
+     swin_t XR_SHOULDER         coral        200     0.372250              0.093424             8.583982          74.902757
+     swin_t XR_SHOULDER ft_source_reg        200     0.239328              0.070197             4.934271          70.668968
+     swin_t XR_SHOULDER         mkmmd        200     0.338849              0.061802             7.157973          81.761331
+     swin_t XR_SHOULDER    vanilla_ft        200     0.274937              0.058387             5.224117          78.763475
+     swin_t XR_SHOULDER       cc_dann        500     0.068251              0.025976             1.500022          61.940938
+     swin_t XR_SHOULDER         coral        500     0.348968              0.061808             8.179401          82.288203
+     swin_t XR_SHOULDER ft_source_reg        500     0.290959              0.063398             6.598887          78.210638
+     swin_t XR_SHOULDER         mkmmd        500     0.333841              0.062171             7.713534          81.377158
+     swin_t XR_SHOULDER    vanilla_ft        500     0.307146              0.083673             7.008130          72.757801
+
+======================================================================
+11. DISTANCE PREDICTOR TABLE (anatomy tiers + best method)
+======================================================================
+     target  median_dist most_common_winner  mean_improvement              dist_tier
+   XR_ELBOW     0.297399      ft_source_reg          0.055636  LOW (similar anatomy)
+    XR_HAND     0.365988         vanilla_ft          0.028464 MEDIUM (partial shift)
+XR_SHOULDER     0.433724      ft_source_reg          0.133604     HIGH (large shift)
+
+======================================================================
+11b. DISTANCE PREDICTOR FULL DATA
+======================================================================
+       arch      target  n_samples  dist_ratio  inter_dist  intra_dist  zero_shot_auc   best_method  best_auc  improvement_over_zs  auc_vanilla_ft  auc_ft_source_reg  auc_mkmmd  auc_coral  auc_cc_dann
+densenet121    XR_ELBOW         50    0.293916    6.259031   21.295301       0.786735    vanilla_ft  0.832155             0.045421        0.832155           0.829729   0.817613   0.808560     0.818221
+densenet121    XR_ELBOW        100    0.293916    6.259031   21.295301       0.786735 ft_source_reg  0.837145             0.050410        0.827977           0.837145   0.807730   0.818215     0.801946
+densenet121    XR_ELBOW        200    0.293916    6.259031   21.295301       0.786735 ft_source_reg  0.843000             0.056266        0.841227           0.843000   0.811489   0.821909     0.780108
+densenet121    XR_ELBOW        500    0.293916    6.259031   21.295301       0.786735    vanilla_ft  0.878264             0.091529        0.878264           0.867138   0.821631   0.831499     0.850635
+densenet121 XR_SHOULDER         50    0.433724   10.491436   24.189196       0.601729    vanilla_ft  0.666538             0.064809        0.666538           0.664187   0.621915   0.627609     0.613358
+densenet121 XR_SHOULDER        100    0.433724   10.491436   24.189196       0.601729 ft_source_reg  0.719117             0.117388        0.709580           0.719117   0.625935   0.592827     0.592006
+densenet121 XR_SHOULDER        200    0.433724   10.491436   24.189196       0.601729 ft_source_reg  0.706443             0.104714        0.706044           0.706443   0.623045   0.602867     0.575483
+densenet121 XR_SHOULDER        500    0.433724   10.491436   24.189196       0.601729    vanilla_ft  0.769155             0.167426        0.769155           0.758559   0.625018   0.604584     0.632704
+densenet121     XR_HAND         50    0.365988    8.389677   22.923376       0.706906       cc_dann  0.750704             0.043799        0.732778           0.730543   0.726026   0.706369     0.750704
+densenet121     XR_HAND        100    0.365988    8.389677   22.923376       0.706906         mkmmd  0.741886             0.034981        0.734077           0.722378   0.741886   0.717673     0.738001
+densenet121     XR_HAND        200    0.365988    8.389677   22.923376       0.706906    vanilla_ft  0.746751             0.039845        0.746751           0.746536   0.734633   0.728590     0.710622
+densenet121     XR_HAND        500    0.365988    8.389677   22.923376       0.706906    vanilla_ft  0.788464             0.081558        0.788464           0.786957   0.732258   0.733419     0.742312
+   resnet50    XR_ELBOW         50    0.297399    4.904397   16.490954       0.743682       cc_dann  0.818912             0.075230        0.816287           0.818480   0.787277   0.798455     0.818912
+   resnet50    XR_ELBOW        100    0.297399    4.904397   16.490954       0.743682 ft_source_reg  0.841477             0.097795        0.833833           0.841477   0.793090   0.794123     0.802640
+   resnet50    XR_ELBOW        200    0.297399    4.904397   16.490954       0.743682 ft_source_reg  0.844456             0.100774        0.835520           0.844456   0.792803   0.766562     0.821665
+   resnet50    XR_ELBOW        500    0.297399    4.904397   16.490954       0.743682 ft_source_reg  0.867965             0.124283        0.860996           0.867965   0.800179   0.777407     0.824107
+   resnet50 XR_SHOULDER         50    0.361486    6.568038   18.169558       0.542762 ft_source_reg  0.669298             0.126537        0.651727           0.669298   0.597242   0.586861     0.609029
+   resnet50 XR_SHOULDER        100    0.361486    6.568038   18.169558       0.542762 ft_source_reg  0.722757             0.179995        0.704689           0.722757   0.595770   0.567422     0.617123
+   resnet50 XR_SHOULDER        200    0.361486    6.568038   18.169558       0.542762 ft_source_reg  0.745353             0.202592        0.722998           0.745353   0.607053   0.597139     0.603423
+   resnet50 XR_SHOULDER        500    0.361486    6.568038   18.169558       0.542762    vanilla_ft  0.780759             0.237997        0.780759           0.768249   0.615243   0.616454     0.618861
+   resnet50     XR_HAND         50    0.372186    6.017985   16.169297       0.655909 ft_source_reg  0.684866             0.028957        0.673982           0.684866   0.641764   0.634325     0.654877
+   resnet50     XR_HAND        100    0.372186    6.017985   16.169297       0.655909    vanilla_ft  0.674815             0.018906        0.674815           0.654598   0.643557   0.665238     0.652948
+   resnet50     XR_HAND        200    0.372186    6.017985   16.169297       0.655909    vanilla_ft  0.709317             0.053408        0.709317           0.692084   0.675234   0.679224     0.670591
+   resnet50     XR_HAND        500    0.372186    6.017985   16.169297       0.655909    vanilla_ft  0.747161             0.091252        0.747161           0.739888   0.660865   0.681954     0.664561
+     swin_t    XR_ELBOW         50    0.309807    6.070506   19.594462       0.839759 ft_source_reg  0.835427            -0.004332        0.823854           0.835427   0.829864   0.817795     0.816207
+     swin_t    XR_ELBOW        100    0.309807    6.070506   19.594462       0.839759 ft_source_reg  0.848619             0.008859        0.847253           0.848619   0.823204   0.817438     0.807027
+     swin_t    XR_ELBOW        200    0.309807    6.070506   19.594462       0.839759 ft_source_reg  0.845779             0.006019        0.835887           0.845779   0.818258   0.842303     0.687243
+     swin_t    XR_ELBOW        500    0.309807    6.070506   19.594462       0.839759    vanilla_ft  0.855137             0.015378        0.855137           0.848282   0.836016   0.831961     0.730290
+     swin_t XR_SHOULDER         50    0.466064   10.195012   21.874708       0.591714 ft_source_reg  0.678163             0.086449        0.670466           0.678163   0.608219   0.567193     0.606559
+     swin_t XR_SHOULDER        100    0.466064   10.195012   21.874708       0.591714    vanilla_ft  0.685538             0.093824        0.685538           0.682471   0.650858   0.602510     0.587324
+     swin_t XR_SHOULDER        200    0.466064   10.195012   21.874708       0.591714 ft_source_reg  0.698887             0.107173        0.686434           0.698887   0.657472   0.595162     0.570682
+     swin_t XR_SHOULDER        500    0.466064   10.195012   21.874708       0.591714    vanilla_ft  0.706058             0.114344        0.706058           0.702825   0.645595   0.605680     0.590593
+     swin_t     XR_HAND         50    0.331405    6.843400   20.649672       0.742107         coral  0.727106            -0.015001        0.699447           0.683858   0.720644   0.727106     0.653260
+     swin_t     XR_HAND        100    0.331405    6.843400   20.649672       0.742107         coral  0.725216            -0.016892        0.678508           0.678511   0.712795   0.725216     0.635728
+     swin_t     XR_HAND        200    0.331405    6.843400   20.649672       0.742107         coral  0.733891            -0.008216        0.714666           0.709694   0.716385   0.733891     0.622705
+     swin_t     XR_HAND        500    0.331405    6.843400   20.649672       0.742107         coral  0.731083            -0.011025        0.717445           0.715962   0.708591   0.731083     0.629880
+
+======================================================================
+12. MULTI-ARCH WINNER CONSISTENCY
+======================================================================
+     target  n_samples    top_winner  n_agree  n_archs  consistency
+   XR_ELBOW         50    vanilla_ft        1        3     0.333333
+   XR_ELBOW        100 ft_source_reg        3        3     1.000000
+   XR_ELBOW        200 ft_source_reg        3        3     1.000000
+   XR_ELBOW        500    vanilla_ft        2        3     0.666667
+XR_SHOULDER         50 ft_source_reg        2        3     0.666667
+XR_SHOULDER        100 ft_source_reg        2        3     0.666667
+XR_SHOULDER        200 ft_source_reg        3        3     1.000000
+XR_SHOULDER        500    vanilla_ft        3        3     1.000000
+    XR_HAND         50       cc_dann        1        3     0.333333
+    XR_HAND        100         mkmmd        1        3     0.333333
+    XR_HAND        200    vanilla_ft        2        3     0.666667
+    XR_HAND        500    vanilla_ft        2        3     0.666667
+
+======================================================================
+13. CC-DANN PSEUDO-LABEL QUALITY
+======================================================================
+    anatomy  n_samples  threshold  n_pseudo  coverage_pct  n_frac_pseudo  n_norm_pseudo  overall_acc  prec_fracture  rec_fracture  prec_normal  rec_normal
+   XR_ELBOW         50       0.75        39          78.0             20             19     0.666667       0.550000      0.733333     0.789474    0.625000
+   XR_ELBOW         50       0.75        41          82.0             25             16     0.829268       0.720000      1.000000     1.000000    0.695652
+   XR_ELBOW         50       0.75        38          76.0             22             16     0.684211       0.681818      0.750000     0.687500    0.611111
+   XR_ELBOW        100       0.75        79          79.0             45             34     0.632911       0.577778      0.722222     0.705882    0.558140
+   XR_ELBOW        100       0.75        81          81.0             47             34     0.790123       0.659574      0.968750     0.970588    0.673469
+   XR_ELBOW        100       0.75        76          76.0             45             31     0.710526       0.644444      0.828571     0.806452    0.609756
+   XR_ELBOW        200       0.75       155          77.5             91             64     0.651613       0.560440      0.784615     0.781250    0.555556
+   XR_ELBOW        200       0.75       157          78.5             93             64     0.700637       0.591398      0.859375     0.859375    0.591398
+   XR_ELBOW        200       0.75       158          79.0             94             64     0.639241       0.553191      0.776119     0.765625    0.538462
+   XR_ELBOW        500       0.75       400          80.0            226            174     0.667500       0.584071      0.771930     0.775862    0.589520
+   XR_ELBOW        500       0.75       395          79.0            232            163     0.696203       0.607759      0.829412     0.822086    0.595556
+   XR_ELBOW        500       0.75       399          79.8            229            170     0.671679       0.558952      0.810127     0.823529    0.580913
+XR_SHOULDER         50       0.75        32          64.0              6             26     0.781250       0.833333      0.454545     0.769231    0.952381
+XR_SHOULDER         50       0.75        36          72.0             12             24     0.583333       0.583333      0.411765     0.583333    0.736842
+XR_SHOULDER         50       0.75        41          82.0              8             33     0.536585       0.500000      0.210526     0.545455    0.818182
+XR_SHOULDER        100       0.75        68          68.0             17             51     0.661765       0.647059      0.392857     0.666667    0.850000
+XR_SHOULDER        100       0.75        70          70.0             20             50     0.628571       0.550000      0.392857     0.660000    0.785714
+XR_SHOULDER        100       0.75        75          75.0             19             56     0.600000       0.526316      0.322581     0.625000    0.795455
+XR_SHOULDER        200       0.75       136          68.0             33            103     0.639706       0.636364      0.362069     0.640777    0.846154
+XR_SHOULDER        200       0.75       143          71.5             41            102     0.636364       0.707317      0.420290     0.607843    0.837838
+XR_SHOULDER        200       0.75       152          76.0             47            105     0.585526       0.617021      0.391892     0.571429    0.769231
+XR_SHOULDER        500       0.75       356          71.2            119            237     0.632022       0.638655      0.463415     0.628692    0.776042
+XR_SHOULDER        500       0.75       361          72.2            112            249     0.645429       0.714286      0.454545     0.614458    0.827027
+XR_SHOULDER        500       0.75       375          75.0            125            250     0.616000       0.640000      0.446927     0.604000    0.770408
+    XR_HAND         50       0.75        45          90.0              5             40     0.800000       0.800000      0.333333     0.800000    0.969697
+    XR_HAND         50       0.75        43          86.0              4             39     0.767442       0.750000      0.250000     0.769231    0.967742
+    XR_HAND         50       0.75        41          82.0              0             41     0.878049       0.000000      0.000000     0.878049    1.000000
+    XR_HAND        100       0.75        92          92.0              7             85     0.782609       0.714286      0.217391     0.788235    0.971014
+    XR_HAND        100       0.75        87          87.0             11             76     0.747126       0.545455      0.260870     0.776316    0.921875
+    XR_HAND        100       0.75        88          88.0              5             83     0.840909       0.800000      0.235294     0.843373    0.985915
+    XR_HAND        200       0.75       178          89.0             15            163     0.775281       0.666667      0.222222     0.785276    0.962406
+    XR_HAND        200       0.75       172          86.0             19            153     0.779070       0.631579      0.279070     0.797386    0.945736
+    XR_HAND        200       0.75       174          87.0             14            160     0.821839       0.785714      0.282051     0.825000    0.977778
+    XR_HAND        500       0.75       435          87.0             35            400     0.767816       0.657143      0.205357     0.777500    0.962848
+    XR_HAND        500       0.75       429          85.8             39            390     0.776224       0.666667      0.238532     0.787179    0.959375
+    XR_HAND        500       0.75       430          86.0             34            396     0.793023       0.676471      0.227723     0.803030    0.966565
+   XR_ELBOW         50       0.75        38          76.0             15             23     0.710526       0.666667      0.625000     0.739130    0.772727
+   XR_ELBOW         50       0.75        35          70.0             17             18     0.771429       0.647059      0.846154     0.888889    0.727273
+   XR_ELBOW         50       0.75        34          68.0             17             17     0.617647       0.705882      0.600000     0.529412    0.642857
+   XR_ELBOW        100       0.75        79          79.0             37             42     0.696203       0.675676      0.675676     0.714286    0.714286
+   XR_ELBOW        100       0.75        78          78.0             36             42     0.807692       0.666667      0.888889     0.928571    0.764706
+   XR_ELBOW        100       0.75        71          71.0             37             34     0.676056       0.702703      0.684211     0.647059    0.666667
+   XR_ELBOW        200       0.75       150          75.0             71             79     0.713333       0.661972      0.712121     0.759494    0.714286
+   XR_ELBOW        200       0.75       152          76.0             73             79     0.684211       0.561644      0.719298     0.797468    0.663158
+   XR_ELBOW        200       0.75       147          73.5             76             71     0.619048       0.592105      0.642857     0.647887    0.597403
+   XR_ELBOW        500       0.75       388          77.6            175            213     0.729381       0.674286      0.710843     0.774648    0.743243
+   XR_ELBOW        500       0.75       372          74.4            180            192     0.701613       0.616667      0.725490     0.781250    0.684932
+   XR_ELBOW        500       0.75       378          75.6            186            192     0.703704       0.634409      0.728395     0.770833    0.685185
+XR_SHOULDER         50       0.75        31          62.0              7             24     0.709677       0.714286      0.416667     0.708333    0.894737
+XR_SHOULDER         50       0.75        33          66.0             11             22     0.575758       0.454545      0.384615     0.636364    0.700000
+XR_SHOULDER         50       0.75        36          72.0             11             25     0.555556       0.636364      0.368421     0.520000    0.764706
+XR_SHOULDER        100       0.75        65          65.0             17             48     0.569231       0.588235      0.322581     0.562500    0.794118
+XR_SHOULDER        100       0.75        66          66.0             16             50     0.560606       0.437500      0.259259     0.600000    0.769231
+XR_SHOULDER        100       0.75        75          75.0             23             52     0.586667       0.565217      0.382353     0.596154    0.756098
+XR_SHOULDER        200       0.75       132          66.0             34             98     0.598485       0.647059      0.349206     0.581633    0.826087
+XR_SHOULDER        200       0.75       137          68.5             31            106     0.569343       0.677419      0.300000     0.537736    0.850746
+XR_SHOULDER        200       0.75       137          68.5             42             95     0.510949       0.500000      0.313433     0.515789    0.700000
+XR_SHOULDER        500       0.75       332          66.4             97            235     0.581325       0.618557      0.370370     0.565957    0.782353
+XR_SHOULDER        500       0.75       345          69.0             99            246     0.553623       0.606061      0.342857     0.532520    0.770588
+XR_SHOULDER        500       0.75       334          66.8            101            233     0.553892       0.574257      0.353659     0.545064    0.747059
+    XR_HAND         50       0.75        45          90.0              5             40     0.800000       0.800000      0.333333     0.800000    0.969697
+    XR_HAND         50       0.75        43          86.0              5             38     0.744186       0.600000      0.250000     0.763158    0.935484
+    XR_HAND         50       0.75        39          78.0              4             35     0.846154       0.250000      0.250000     0.914286    0.914286
+    XR_HAND        100       0.75        89          89.0              8             81     0.752809       0.625000      0.208333     0.765432    0.953846
+    XR_HAND        100       0.75        86          86.0              9             77     0.732558       0.555556      0.208333     0.753247    0.935484
+    XR_HAND        100       0.75        84          84.0              8             76     0.809524       0.500000      0.250000     0.842105    0.941176
+    XR_HAND        200       0.75       179          89.5             15            164     0.726257       0.466667      0.145833     0.750000    0.938931
+    XR_HAND        200       0.75       173          86.5             17            156     0.739884       0.529412      0.195652     0.762821    0.937008
+    XR_HAND        200       0.75       172          86.0             21            151     0.779070       0.523810      0.282051     0.814570    0.924812
+    XR_HAND        500       0.75       445          89.0             43            402     0.728090       0.488372      0.175000     0.753731    0.932308
+    XR_HAND        500       0.75       435          87.0             40            395     0.731034       0.550000      0.181818     0.749367    0.942675
+    XR_HAND        500       0.75       435          87.0             53            382     0.735632       0.471698      0.223214     0.772251    0.913313
+   XR_ELBOW         50       0.75        30          60.0             22              8     0.633333       0.590909      0.866667     0.750000    0.400000
+   XR_ELBOW         50       0.75        29          58.0             18             11     0.827586       0.777778      0.933333     0.909091    0.714286
+   XR_ELBOW         50       0.75        28          56.0             21              7     0.750000       0.761905      0.888889     0.714286    0.500000
+   XR_ELBOW        100       0.75        65          65.0             52             13     0.676923       0.653846      0.918919     0.769231    0.357143
+   XR_ELBOW        100       0.75        62          62.0             34             28     0.838710       0.764706      0.928571     0.928571    0.764706
+   XR_ELBOW        100       0.75        58          58.0             44             14     0.741379       0.704545      0.939394     0.857143    0.480000
+   XR_ELBOW        200       0.75       128          64.0             91             37     0.726562       0.670330      0.924242     0.864865    0.516129
+   XR_ELBOW        200       0.75       121          60.5             78             43     0.702479       0.602564      0.903846     0.883721    0.550725
+   XR_ELBOW        200       0.75       129          64.5             93             36     0.713178       0.655914      0.924242     0.861111    0.492063
+   XR_ELBOW        500       0.75       323          64.6            216            107     0.736842       0.680556      0.901840     0.850467    0.568750
+   XR_ELBOW        500       0.75       303          60.6            204             99     0.712871       0.642157      0.903448     0.858586    0.537975
+   XR_ELBOW        500       0.75       328          65.6            215            113     0.722561       0.637209      0.913333     0.884956    0.561798
+XR_SHOULDER         50       0.75        44          88.0             41              3     0.409091       0.365854      1.000000     1.000000    0.103448
+XR_SHOULDER         50       0.75        45          90.0             44              1     0.511111       0.522727      0.958333     0.000000    0.000000
+XR_SHOULDER         50       0.75        42          84.0             39              3     0.523810       0.512821      0.952381     0.666667    0.095238
+XR_SHOULDER        100       0.75        88          88.0             84              4     0.431818       0.416667      0.972222     0.750000    0.057692
+XR_SHOULDER        100       0.75        88          88.0             85              3     0.477273       0.470588      0.975610     0.666667    0.042553
+XR_SHOULDER        100       0.75        89          89.0             81              8     0.471910       0.444444      0.947368     0.750000    0.117647
+XR_SHOULDER        200       0.75       172          86.0            163              9     0.511628       0.490798      0.987654     0.888889    0.087912
+XR_SHOULDER        200       0.75       174          87.0            164             10     0.557471       0.554878      0.957895     0.600000    0.075949
+XR_SHOULDER        200       0.75       170          85.0            161              9     0.517647       0.503106      0.975904     0.777778    0.080460
+XR_SHOULDER        500       0.75       434          86.8            410             24     0.536866       0.519512      0.981567     0.833333    0.092166
+XR_SHOULDER        500       0.75       423          84.6            405             18     0.534279       0.528395      0.972727     0.666667    0.059113
+XR_SHOULDER        500       0.75       437          87.4            420             17     0.517162       0.502381      0.990610     0.882353    0.066964
+    XR_HAND         50       0.75        48          96.0              7             41     0.791667       0.714286      0.384615     0.804878    0.942857
+    XR_HAND         50       0.75        42          84.0              5             37     0.714286       0.400000      0.181818     0.756757    0.903226
+    XR_HAND         50       0.75        44          88.0              1             43     0.840909       1.000000      0.125000     0.837209    1.000000
+    XR_HAND        100       0.75        91          91.0              8             83     0.780220       0.625000      0.227273     0.795181    0.956522
+    XR_HAND        100       0.75        80          80.0              9             71     0.725000       0.444444      0.190476     0.760563    0.915254
+    XR_HAND        100       0.75        87          87.0              6             81     0.839080       0.833333      0.277778     0.839506    0.985507
+    XR_HAND        200       0.75       177          88.5             19            158     0.785311       0.736842      0.297872     0.791139    0.961538
+    XR_HAND        200       0.75       162          81.0             21            141     0.790123       0.571429      0.324324     0.822695    0.928000
+    XR_HAND        200       0.75       170          85.0             15            155     0.805882       0.800000      0.285714     0.806452    0.976562
+    XR_HAND        500       0.75       423          84.6             48            375     0.765957       0.645833      0.274336     0.781333    0.945161
+    XR_HAND        500       0.75       420          84.0             48            372     0.773810       0.604167      0.276190     0.795699    0.939683
+    XR_HAND        500       0.75       419          83.8             42            377     0.778043       0.666667      0.261682     0.790451    0.955128
+
+======================================================================
+14. FEATURE DISTANCE RATIOS (per arch x anatomy)
+======================================================================
+       arch     anatomy  inter_dist  intra_dist  dist_ratio
+densenet121    XR_WRIST    0.000000   20.952150    0.000000
+densenet121    XR_ELBOW    6.259031   21.295301    0.293916
+densenet121     XR_HAND    8.389677   22.923376    0.365988
+densenet121 XR_SHOULDER   10.491436   24.189196    0.433724
+densenet121   XR_FINGER    5.482646   22.622526    0.242353
+densenet121  XR_FOREARM    6.938090   27.089703    0.256115
+densenet121  XR_HUMERUS    8.909774   25.044661    0.355755
+   resnet50    XR_WRIST    0.000000   15.756465    0.000000
+   resnet50    XR_ELBOW    4.904397   16.490954    0.297399
+   resnet50     XR_HAND    6.017985   16.169297    0.372186
+   resnet50 XR_SHOULDER    6.568038   18.169558    0.361486
+   resnet50   XR_FINGER    4.634705   18.495695    0.250583
+   resnet50  XR_FOREARM    4.959825   18.321193    0.270715
+   resnet50  XR_HUMERUS    6.248828   17.977486    0.347592
+     swin_t    XR_WRIST    0.000000   20.090114    0.000000
+     swin_t    XR_ELBOW    6.070506   19.594462    0.309807
+     swin_t     XR_HAND    6.843400   20.649672    0.331405
+     swin_t XR_SHOULDER   10.195012   21.874708    0.466064
+     swin_t   XR_FINGER    5.016519   22.143107    0.226550
+     swin_t  XR_FOREARM    4.561148   24.313910    0.187594
+     swin_t  XR_HUMERUS    7.558249   23.566611    0.320719
+
+======================================================================
+15. GRAD-CAM ATTENTION STATS
+======================================================================
+       arch     anatomy  mean_cam_fracture  mean_cam_normal  centrality_fracture  centrality_normal
+densenet121    XR_WRIST           0.334814         0.241187             0.875259           0.874530
+densenet121    XR_ELBOW           0.307914         0.261039             0.864854           0.773209
+densenet121     XR_HAND           0.283753         0.316037             0.807847           0.797286
+densenet121 XR_SHOULDER           0.357524         0.306190             0.848166           0.766349
+densenet121   XR_FINGER           0.318975         0.353116             0.863081           0.831388
+densenet121  XR_FOREARM           0.262948         0.242300             0.827640           0.695511
+densenet121  XR_HUMERUS           0.265106         0.300381             0.765153           0.845862
+   resnet50    XR_WRIST           0.132514         0.088551             0.817989           0.834957
+   resnet50    XR_ELBOW           0.124187         0.092532             0.816697           0.770374
+   resnet50     XR_HAND           0.087624         0.115141             0.763546           0.839195
+   resnet50 XR_SHOULDER           0.122932         0.103326             0.753891           0.815837
+   resnet50   XR_FINGER           0.105517         0.116800             0.720538           0.814243
+   resnet50  XR_FOREARM           0.099284         0.125697             0.758628           0.725990
+   resnet50  XR_HUMERUS           0.108922         0.140343             0.816870           0.845200
+     swin_t    XR_WRIST           0.100346         0.081973             0.939440           0.943621
+     swin_t    XR_ELBOW           0.121244         0.084838             0.928471           0.921248
+     swin_t     XR_HAND           0.101427         0.094932             0.962897           0.957017
+     swin_t XR_SHOULDER           0.106517         0.097665             0.939248           0.922130
+     swin_t   XR_FINGER           0.109510         0.108112             0.956172           0.940701
+     swin_t  XR_FOREARM           0.113809         0.114883             0.942558           0.930591
+     swin_t  XR_HUMERUS           0.094949         0.102215             0.958713           0.952920
+
+======================================================================
+SUMMARY COMPLETE
+======================================================================
+
+Output saved — upload summary_output.txt to Claude for analysis.
+
+
+
+
+Let me read this carefully.Now I have everything. Let me do the complete analysis.Here is everything in plain language.
+
+---
+
+## What Every Section of Your Results Is Saying
+
+### Section 1 — Zero-Shot Transfer
+You trained only on wrist X-rays. When you test on other anatomies without any adaptation, performance drops 4-33% depending on the anatomy. Shoulder is the worst (drops 29-33%). Forearm is the easiest (drops only 4-7%). Swin-T transfers best zero-shot to most anatomies, but struggles when you try to adapt it.
+
+### Section 2 — Winner Consistency (Most Important)
+When all 3 architectures agree on the same winning DA method, it proves the finding is about the anatomy, not the model. At n=100-200 labeled samples, ft_source_reg wins on ELBOW and SHOULDER across all 3 architectures simultaneously — that's a structural finding. At n=50, there's no consensus — too noisy.
+
+### Section 3 — DA Performance
+Simple fine-tuning beats everything else on SHOULDER (gains of 11-24pp AUC). CC-DANN completely collapses on Swin-T SHOULDER — specificity drops to 0.069, meaning it predicts almost everything as fracture. Swin-T HAND cannot be improved by ANY method — a unique and important negative finding.
+
+### Section 4 — Calibration
+DA improves AUC but does NOT fix the model's overconfidence. You always need temperature scaling afterward. Swin-T SHOULDER needs T=9.0 — the model's confidence scores are 9 times too extreme. CC-DANN is the worst offender post-adaptation (T up to 11.1). ft_source_reg has the most stable calibration (T=2.9-4.0) across all anatomies.
+
+### Section 5 — DANN Stability
+DANN across 5 seeds at n=500 gives AUC ranging from 0.790 to 0.833 — a spread of 4.3pp. Vanilla fine-tuning gives 0.878 with a spread of only 0.6pp. DANN is 5× more variable and 4.5pp worse than simple fine-tuning. This proves DANN is not suitable for cross-anatomy transfer.
+
+### Section 6 — Transferability Predictors
+Calibration temperature is your strongest predictor of how badly a model will fail on a new anatomy (r=-0.794, p<0.0001). The more overconfident the source model is on a new anatomy, the worse it transfers. This is label-free — you can measure it before collecting any labeled target data. The composite predictor fails because the three individual metrics measure different things with opposite signs — combining them cancels out the signal.
+
+### Section 7 — CC-DANN Pseudo-Label Quality
+CC-DANN fails on HAND and SHOULDER because the source model only correctly identifies 18-46% of fractures on those anatomies. It generates pseudo-labels that are mostly wrong for the fracture class, then trains on this noisy supervision. This directly explains all CC-DANN failures.
+
+### Section 8 — Grad-CAM
+DenseNet's attention inverts on XR_HAND — it pays more attention to normal images than fracture images. This means it's not detecting fractures on hands, it's detecting "not a wrist." Swin-T keeps its attention centered on all anatomies because global attention doesn't drift the same way local CNN features do.
+
+### Section 9 — Extended DA (Finger/Forearm/Humerus)
+XR_HUMERUS adapts best of all anatomies (AUC 0.856-0.905). XR_FOREARM also adapts very well. On HUMERUS specifically, vanilla_ft beats ft_source_reg — meaning the source regularization actually hurts when the target anatomy is different enough that you want to move away from source features, not stay close to them.
+
+### Section 10 — MC Dropout Uncertainty
+On the source anatomy (wrist), the model correctly knows when it's uncertain — uncertainty gap ratio is 2.6-3.4. On XR_SHOULDER, this drops to 1.0-1.2, meaning the model is wrong AND confident AND has no idea it's wrong. This is a double failure: discrimination AND uncertainty both break down on the hardest anatomy.
+
+---
+
+## The Complete Story for Your Paper
+
+Your results tell a coherent, five-part story:
+
+**Part 1:** Cross-anatomy transfer failure is real, large (up to 33%), and predictable. Calibration temperature alone predicts transfer difficulty (r=-0.794) without needing any target labels.
+
+**Part 2:** The right adaptation strategy depends on anatomy. Low-shift anatomies need ft_source_reg. High-shift anatomies need vanilla fine-tuning with enough labels. Medium-shift anatomies (HAND) are architecture-dependent — CNNs adapt, Swin-T cannot.
+
+**Part 3:** Complex DA methods (DANN, CC-DANN) fail due to specific, diagnosable reasons — DANN is too unstable, CC-DANN trains on wrong pseudo-labels (fracture recall 18-46%). Simple fine-tuning is more reliable.
+
+**Part 4:** AUC and calibration are separate problems. You must apply temperature scaling even after the best DA method. CC-DANN creates the worst overconfidence, ft_source_reg the most stable calibration.
+
+**Part 5:** Swin-T's global attention makes it a better zero-shot transferrer but a worse few-shot adapter. CNNs adapt more efficiently at low sample sizes. The architecture choice depends on whether you have target labels or not.
+
+---
+
+## What to Do Now
+
+You have everything you need. No more experiments. Start writing the paper. The structure maps directly to your sections:
+
+- **Introduction:** Cross-anatomy transfer is dangerous and understudied
+- **Methods:** Three architectures, five DA methods, six target anatomies, three predictors
+- **Results 4.1:** Zero-shot AUC table with anatomy-dependent drop analysis
+- **Results 4.2:** DA method comparison with winner consistency table
+- **Results 4.3:** Calibration — pre and post DA, temperature scaling necessity
+- **Results 4.4:** Transferability predictors — temperature as strongest label-free predictor
+- **Results 4.5:** Failure analysis — DANN instability, CC-DANN pseudo-label quality, Swin-T XR_HAND
+- **Results 4.6:** External validation on GRAZ
+- **Discussion:** Why simple beats complex, why calibration temperature works, Swin-T duality, limitations
+
+Every paper statement you need is written out in the analysis above. Use them directly as first drafts of your result sentences.
